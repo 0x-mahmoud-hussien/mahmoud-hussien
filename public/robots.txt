@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://TODO_YOUR_DOMAIN.vercel.app/sitemap-index.xml

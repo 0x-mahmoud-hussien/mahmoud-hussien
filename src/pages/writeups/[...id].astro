@@ -1,0 +1,220 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PlatformBadge from '../../components/PlatformBadge.astro';
+import DifficultyBadge from '../../components/DifficultyBadge.astro';
+import SkillTag from '../../components/SkillTag.astro';
+
+export async function getStaticPaths() {
+  const writeups = await getCollection('writeups');
+  return writeups.map(entry => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { title, description, date, platform, difficulty, category, tags, tools, room_url } = entry.data;
+
+const formattedDate = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+  timeZone: 'UTC'
+}).format(date);
+---
+
+<BaseLayout 
+  title={`${title} — Writeup`}
+  description={description}
+  type="article"
+  publishedDate={date}
+>
+  <div class="writeup-container">
+    <a href="/writeups" class="back-link">← writeups</a>
+    
+    <header class="writeup-header">
+      <h1 class="title">{title}</h1>
+      
+      <div class="meta-row">
+        <PlatformBadge platform={platform} />
+        <span class="divider">·</span>
+        <DifficultyBadge difficulty={difficulty} />
+        <span class="divider">·</span>
+        <span class="date">{formattedDate}</span>
+        <span class="divider">·</span>
+        <span class="category">{category}</span>
+      </div>
+
+      <div class="tags">
+        {tags.map((tag: string) => <span class="tag">#{tag}</span>)}
+      </div>
+
+      {tools && tools.length > 0 && (
+        <div class="tools-row">
+          <span class="tools-label">Tools used:</span>
+          <div class="tools-list">
+            {tools.map((tool: string) => <SkillTag name={tool} />)}
+          </div>
+        </div>
+      )}
+
+      {room_url && (
+        <div class="room-link-container">
+          <a href={room_url} target="_blank" rel="noopener noreferrer" class="room-link">→ View original challenge</a>
+        </div>
+      )}
+    </header>
+
+    <hr class="header-divider" />
+
+    <article class="markdown-content">
+      <Content />
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .writeup-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 2rem;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+  }
+
+  .back-link:hover {
+    color: var(--accent);
+  }
+
+  .writeup-header {
+    margin-bottom: 2rem;
+  }
+
+  .title {
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .meta-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  .divider {
+    color: var(--text-tertiary);
+  }
+
+  .date {
+    color: var(--text-secondary);
+  }
+
+  .category {
+    color: var(--text-secondary);
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .tag {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+  }
+
+  .tools-row {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tools-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+
+  .tools-list {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .room-link-container {
+    margin-top: 1.5rem;
+  }
+
+  .room-link {
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .header-divider {
+    border: 0;
+    border-top: 1px solid var(--border);
+    margin-bottom: 3rem;
+  }
+
+  .markdown-content {
+    line-height: 1.8;
+  }
+
+  .markdown-content :global(h2) {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    font-size: 1.4rem;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+
+  .markdown-content :global(h3) {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+  }
+
+  .markdown-content :global(p) {
+    margin-bottom: 1.5rem;
+  }
+
+  .markdown-content :global(pre) {
+    margin: 1.5rem 0;
+  }
+
+  .markdown-content :global(ul), .markdown-content :global(ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .markdown-content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  .markdown-content :global(blockquote) {
+    border-left: 3px solid var(--accent);
+    background: var(--bg-surface);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    color: var(--text-secondary);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  }
+  
+  .markdown-content :global(blockquote p:last-child) {
+    margin-bottom: 0;
+  }
+</style>

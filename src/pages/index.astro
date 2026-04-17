@@ -1,0 +1,220 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { profile } from '../data/profile';
+import { skillCategories } from '../data/skills';
+import { getCollection } from 'astro:content';
+import WriteupCard from '../components/WriteupCard.astro';
+import SkillTag from '../components/SkillTag.astro';
+
+const allWriteups = await getCollection('writeups');
+const featuredWriteups = allWriteups
+  .filter(w => w.data.featured && !w.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const topSkills = skillCategories.flatMap(c => c.tools).slice(0, 10);
+---
+
+<BaseLayout 
+  title="Home" 
+  description={profile.bio.split('\n')[0]}
+>
+  <section class="hero">
+    <div class="status-badge">
+      <span class="pulsing-dot"></span>
+      {profile.status}
+    </div>
+    
+    <h1 class="name">{profile.name}</h1>
+    <h2 class="title">{profile.title}</h2>
+    
+    <p class="bio">
+      {profile.bio.split('\n').map(line => <>{line}<br/></>)}
+    </p>
+
+    <div class="ctas">
+      <a href="/writeups" class="cta-link">→ Read Writeups</a>
+      <a href="/about" class="cta-link">→ About Me</a>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat"><span class="stat-num">{profile.stats.writeups}</span> <span class="stat-label">writeups</span></div>
+      <span class="divider">·</span>
+      <div class="stat"><span class="stat-num">{profile.stats.roomsCompleted}</span> <span class="stat-label">rooms</span></div>
+      <span class="divider">·</span>
+      <div class="stat"><span class="stat-num">{profile.stats.thmRank}</span> <span class="stat-label">THM rank</span></div>
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <section class="featured-writeups">
+    <h2 class="section-label">// recent writeups</h2>
+    <div class="writeups-list">
+      {featuredWriteups.map(writeup => (
+        <WriteupCard writeup={writeup} />
+      ))}
+    </div>
+    <div class="view-all-container">
+      <a href="/writeups" class="view-all-link">→ all writeups</a>
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <section class="tools-section">
+    <h2 class="section-label">// what i work with</h2>
+    <p>I spend most of my time in these tools:</p>
+    <div class="tools-list">
+      {topSkills.map((tool) => (
+        <SkillTag name={tool} />
+      ))}
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <section class="currently">
+    <h2 class="section-label">// currently</h2>
+    <ul class="status-list">
+      <li>Working on the CompTIA Security+ certification</li>
+      <li>Actively completing SOC related labs on CyberDefenders</li>
+      <li>Targeting Junior SOC Analyst or Security Operations roles</li>
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  section {
+    margin-bottom: 5rem;
+  }
+  
+  .section-divider {
+    border: 0;
+    border-top: 1px solid var(--border);
+    margin-bottom: 5rem;
+    width: 100%;
+  }
+
+  .section-label {
+    margin-bottom: 2rem;
+  }
+
+  .hero {
+    margin-top: 2rem;
+  }
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+  }
+
+  .pulsing-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(57, 211, 83, 0.4); }
+    70% { box-shadow: 0 0 0 6px rgba(57, 211, 83, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(57, 211, 83, 0); }
+  }
+
+  .name {
+    margin-bottom: 0.5rem;
+  }
+
+  .title {
+    color: var(--accent);
+    font-size: 1.2rem;
+    text-transform: none;
+    letter-spacing: normal;
+    margin-bottom: 1.5rem;
+  }
+
+  .bio {
+    max-width: 600px;
+    margin-bottom: 2rem;
+  }
+
+  .ctas {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .cta-link {
+    font-weight: 500;
+  }
+
+  .stats-row {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+    font-size: 0.85rem;
+  }
+
+  .stat-num {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  .stat-label {
+    color: var(--text-secondary);
+  }
+
+  .divider {
+    color: var(--text-tertiary);
+  }
+
+  .view-all-container {
+    text-align: right;
+    margin-top: 1rem;
+  }
+
+  .view-all-link {
+    font-size: 0.85rem;
+  }
+
+  .tools-section p {
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+  }
+
+  .tools-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .status-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .status-list li {
+    position: relative;
+    padding-left: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+  }
+
+  .status-list li::before {
+    content: '-';
+    position: absolute;
+    left: 0;
+    color: var(--text-tertiary);
+  }
+</style>

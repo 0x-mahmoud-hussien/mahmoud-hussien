@@ -1,0 +1,20 @@
+---
+interface Props {
+  name: string;
+}
+const { name } = Astro.props;
+---
+<span class="skill-tag">{name}</span>
+
+<style>
+  .skill-tag {
+    display: inline-block;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+</style>

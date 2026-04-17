@@ -1,0 +1,84 @@
+---
+import { profile } from '../data/profile';
+const currentPath = Astro.url.pathname;
+const isActive = (path: string) => currentPath === path || (path !== '/' && currentPath.startsWith(path)) ? 'active' : '';
+---
+<nav>
+  <div class="nav-content">
+    <a href="/" class="logo">
+      <span class="logo-desktop">0xMahmoudHussien</span>
+      <span class="logo-mobile">MH_</span>
+    </a>
+    <div class="links">
+      <a href="/writeups" class={isActive('/writeups')}>./WRITEUPS</a>
+      <a href="/about" class={isActive('/about')}>./ABOUT</a>
+      <a href="/contact" class={isActive('/contact')}>./CONTACT</a>
+    </div>
+  </div>
+</nav>
+
+<style>
+  nav {
+    position: fixed;
+    top: 0; left: 0; width: 100%;
+    height: var(--nav-height);
+    background: rgba(7, 9, 13, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+  }
+  .nav-content {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+  }
+  .logo {
+    color: var(--accent);
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: text-shadow 0.2s ease;
+  }
+  .logo:hover {
+    text-shadow: 0 0 8px var(--accent-muted);
+  }
+  .logo-mobile {
+    display: none;
+  }
+  .links {
+    display: flex;
+    gap: 1.5rem;
+  }
+  .links a {
+    /* Improved contrast ratio for accessibility */
+    color: #a3b3c4; 
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: all 0.15s ease;
+  }
+  .links a:hover, .links a.active {
+    color: var(--accent);
+  }
+
+  @media (max-width: 768px) {
+    .logo-desktop {
+      display: none;
+    }
+    .logo-mobile {
+      display: inline;
+    }
+    .links {
+      gap: 1rem;
+    }
+    .links a {
+      font-size: 0.75rem;
+    }
+  }
+</style>

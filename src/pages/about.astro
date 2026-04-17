@@ -1,0 +1,180 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { profile } from '../data/profile';
+import { skillCategories } from '../data/skills';
+import { certifications } from '../data/certifications';
+import SkillTag from '../components/SkillTag.astro';
+---
+<BaseLayout title="About Me" description="More about Mahmoud Hussien, Junior SOC Analyst.">
+  <section class="about-intro">
+    <h1 class="section-label">// about</h1>
+    <p>
+      I'm {profile.name}, a self-taught cybersecurity enthusiast transitioning into a 
+      Junior SOC Analyst or DFIR role. My journey has been built entirely on 
+      hands-on practice across platforms like TryHackMe and CyberDefenders. 
+      I believe the best way to prove understanding is by teaching and documenting, 
+      which is exactly what this site is for. I'm highly motivated by solving complex 
+      puzzles, analyzing packet captures, and understanding attacker behavior in depth.
+    </p>
+  </section>
+
+  <hr class="section-divider" />
+
+  <section class="skills-section">
+    <h2 class="section-label">// skills & tools</h2>
+    <div class="skills-container">
+      {skillCategories.map(category => (
+        <div class="skill-category">
+          <h3 class="category-title">{category.label}</h3>
+          <div class="tools-list">
+            {category.tools.map(tool => (
+              <SkillTag name={tool} />
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <section class="certifications">
+    <h2 class="section-label">// certifications</h2>
+    <div class="cert-list">
+      {certifications.map(cert => (
+        <div class="cert-row">
+          <span class={`status-dot ${cert.status}`}></span>
+          <span class="cert-name">{cert.name}</span>
+          <span class="divider">·</span>
+          <span class="cert-issuer">{cert.issuer}</span>
+          <span class="divider">·</span>
+          <span class="cert-year">{cert.date}</span>
+          {cert.url && (
+            <>
+              <span class="divider">·</span>
+              <a href={cert.url} target="_blank" rel="noopener noreferrer" class="cert-link">verify ↗</a>
+            </>
+          )}
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <section class="hire-me">
+    <h2 class="section-label">// hire me</h2>
+    <p>
+      I am currently looking for <strong>Tier 1 SOC Analyst</strong>, <strong>Junior DFIR</strong>, 
+      or general Security Operations roles. What I lack in corporate years, I make up for 
+      with a solid foundation of documented platform learning, practical lab work, and an 
+      eagerness to learn fast and adapt to any environment.
+    </p>
+    <a href="/contact" class="reach-out-link">→ Reach out</a>
+  </section>
+</BaseLayout>
+
+<style>
+  section {
+    margin-bottom: 5rem;
+  }
+  
+  .section-divider {
+    border: 0;
+    border-top: 1px solid var(--border);
+    margin-bottom: 5rem;
+    width: 100%;
+  }
+
+  .section-label {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .about-intro p, .hire-me p {
+    max-width: 650px;
+    margin-bottom: 1.5rem;
+  }
+
+  .skills-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .category-title {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+    margin-bottom: 1rem;
+  }
+
+  .tools-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .cert-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .cert-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    background: var(--bg-surface);
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .status-dot.completed {
+    background: var(--green);
+  }
+
+  .status-dot.in-progress {
+    border: 1px solid var(--amber);
+    background: transparent;
+  }
+
+  .cert-name {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  .cert-issuer {
+    color: var(--text-secondary);
+  }
+
+  .cert-year {
+    color: var(--text-tertiary);
+  }
+
+  .divider {
+    color: var(--text-tertiary);
+  }
+
+  .cert-link {
+    font-size: 0.75rem;
+  }
+
+  .reach-out-link {
+    font-weight: 500;
+    font-size: 1.1rem;
+  }
+</style>

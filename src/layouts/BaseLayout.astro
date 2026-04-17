@@ -1,0 +1,111 @@
+---
+import '../styles/global.css';
+import { profile } from '../data/profile';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  type?: string;
+  publishedDate?: Date;
+}
+
+const { 
+  title, 
+  description, 
+  ogImage = '/og-default.png', 
+  type = 'website',
+  publishedDate 
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
+const siteHostname = Astro.site ? Astro.site.toString() : Astro.url.origin;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Primary -->
+    <title>{title} — Mahmoud Hussien</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Mahmoud Hussien" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={`${title} — Mahmoud Hussien`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, canonicalURL)} />
+    <meta property="og:site_name" content="Mahmoud Hussien — Junior SOC Analyst" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={`${title} — Mahmoud Hussien`} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, canonicalURL)} />
+
+    <!-- Article-specific (writeup pages only) -->
+    {publishedDate && <meta property="article:published_time" content={publishedDate.toISOString()} />}
+    
+    <!-- JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Mahmoud Hussien",
+      "jobTitle": "Junior SOC Analyst",
+      "url": siteHostname,
+      "sameAs": [
+        profile.social.github,
+        profile.social.linkedin,
+        profile.social.tryhackme
+      ]
+    })} />
+
+    {type === 'article' && publishedDate && (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": title,
+        "datePublished": publishedDate.toISOString(),
+        "description": description,
+        "author": {
+          "@type": "Person",
+          "name": "Mahmoud Hussien"
+        }
+      })} />
+    )}
+
+    <style>
+      main {
+        opacity: 0;
+        animation: fadeIn 0.3s ease forwards;
+        animation-delay: 0.1s;
+      }
+      @keyframes fadeIn {
+        to { opacity: 1; }
+      }
+    </style>
+  </head>
+  <body>
+    <Nav />
+    <main style="max-width: var(--max-width); margin: 0 auto; padding: 1.5rem; padding-top: calc(var(--nav-height) + 3rem); min-height: calc(100vh - var(--nav-height)); display: flex; flex-direction: column;">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

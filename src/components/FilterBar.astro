@@ -1,0 +1,96 @@
+---
+---
+<div class="filter-bar">
+  <div class="filter-group" id="filter-platform">
+    <button class="filter-btn active" data-value="All">All</button>
+    <button class="filter-btn" data-value="TryHackMe">TryHackMe</button>
+    <button class="filter-btn" data-value="CyberDefenders">CyberDefenders</button>
+    <button class="filter-btn" data-value="HackTheBox">HackTheBox</button>
+    <button class="filter-btn" data-value="picoCTF">picoCTF</button>
+  </div>
+  <div class="filter-group" id="filter-category">
+    <button class="filter-btn active" data-value="All">All</button>
+    <button class="filter-btn" data-value="Blue Team">Blue Team</button>
+    <button class="filter-btn" data-value="Forensics">Forensics</button>
+    <button class="filter-btn" data-value="CTF">CTF</button>
+    <button class="filter-btn" data-value="Threat Hunting">Threat Hunting</button>
+    <button class="filter-btn" data-value="OSINT">OSINT</button>
+  </div>
+</div>
+
+<style>
+  .filter-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .filter-btn {
+    appearance: none;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .filter-btn:hover {
+    border-color: var(--accent);
+    color: var(--text-primary);
+  }
+  .filter-btn.active {
+    background: var(--accent-muted);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+</style>
+
+<script>
+  let platformFilter = 'All';
+  let categoryFilter = 'All';
+
+  function applyFilters() {
+    const cards = document.querySelectorAll<HTMLElement>('.writeup-card-wrapper');
+    cards.forEach(card => {
+      const p = card.dataset.platform;
+      const c = card.dataset.category;
+      
+      const pMatch = platformFilter === 'All' || p === platformFilter;
+      const cMatch = categoryFilter === 'All' || c === categoryFilter;
+
+      if (pMatch && cMatch) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  document.querySelectorAll('#filter-platform .filter-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const target = e.target as HTMLButtonElement;
+      document.querySelectorAll('#filter-platform .filter-btn').forEach(b => b.classList.remove('active'));
+      target.classList.add('active');
+      platformFilter = target.dataset.value || 'All';
+      applyFilters();
+    });
+  });
+
+  document.querySelectorAll('#filter-category .filter-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const target = e.target as HTMLButtonElement;
+      document.querySelectorAll('#filter-category .filter-btn').forEach(b => b.classList.remove('active'));
+      target.classList.add('active');
+      categoryFilter = target.dataset.value || 'All';
+      applyFilters();
+    });
+  });
+</script>

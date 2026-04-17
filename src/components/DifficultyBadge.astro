@@ -1,0 +1,21 @@
+---
+interface Props {
+  difficulty: 'Easy' | 'Medium' | 'Hard' | string;
+}
+const { difficulty } = Astro.props;
+
+let colorVar = 'var(--text-secondary)';
+if (difficulty === 'Easy') colorVar = 'var(--green)';
+if (difficulty === 'Medium') colorVar = 'var(--amber)';
+if (difficulty === 'Hard') colorVar = 'var(--red)';
+---
+<span class="difficulty" style={`color: ${colorVar}`}>
+  {difficulty}
+</span>
+
+<style>
+  .difficulty {
+    font-size: 0.7rem;
+    font-weight: 500;
+  }
+</style>
