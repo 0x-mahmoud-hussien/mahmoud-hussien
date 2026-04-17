@@ -7,9 +7,9 @@ const writeups = defineCollection({
     title:        z.string(),
     description:  z.string(),          // 1-2 sentences shown in card
     date:         z.coerce.date(),
-    platform:     z.enum(['TryHackMe', 'CyberDefenders', 'HackTheBox', 'picoCTF', 'Other']),
+    platform:     z.enum(['TryHackMe', 'CyberDefenders', 'HackTheBox', 'Other']),
     difficulty:   z.enum(['Easy', 'Medium', 'Hard']),
-    category:     z.enum(['Blue Team', 'Forensics', 'CTF', 'Threat Hunting', 'OSINT', 'Web', 'Crypto']),
+    category:     z.enum(['Blue Team', 'Forensics', 'CTF', 'Threat Hunting', 'OSINT', 'Web', 'Crypto', 'Incident Response / DFIR']),
     tags:         z.array(z.string()),
     featured:     z.boolean().default(false),  // show on home page
     draft:        z.boolean().default(false),  // hide from listing if true
