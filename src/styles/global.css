@@ -111,6 +111,21 @@ pre code {
   color: inherit;
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--border);
+}
+
+th, td {
+  border: 1px solid var(--border);
+  padding: 0.65rem 0.85rem;
+}
+
+th {
+  background: rgba(255, 255, 255, 0.04);
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
