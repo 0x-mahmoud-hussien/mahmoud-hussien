@@ -74,6 +74,55 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
     </article>
   </div>
 </BaseLayout>
+<script>
+  import GLightbox from 'glightbox';
+  import 'glightbox/dist/css/glightbox.min.css';
+
+  const setupWriteupLightbox = () => {
+    const container = document.querySelector('.markdown-content');
+    if (!container || container.dataset.lightboxInitialized === 'true') {
+      return;
+    }
+
+    const images = container.querySelectorAll('img');
+    images.forEach((img) => {
+      const existingLink = img.closest('a');
+      if (existingLink) {
+        existingLink.classList.add('glightbox');
+        existingLink.dataset.gallery = 'writeup-gallery';
+        if (!existingLink.getAttribute('href')) {
+          existingLink.setAttribute('href', img.currentSrc || img.src);
+        }
+        return;
+      }
+
+      const link = document.createElement('a');
+      link.href = img.currentSrc || img.src;
+      link.className = 'glightbox';
+      link.dataset.gallery = 'writeup-gallery';
+      if (img.alt) {
+        link.dataset.title = img.alt;
+      }
+
+      img.parentNode?.insertBefore(link, img);
+      link.appendChild(img);
+    });
+
+    GLightbox({
+      selector: '.markdown-content a.glightbox',
+      touchNavigation: true,
+      loop: true,
+    });
+
+    container.dataset.lightboxInitialized = 'true';
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupWriteupLightbox, { once: true });
+  } else {
+    setupWriteupLightbox();
+  }
+</script>
 
 <style>
   .writeup-container {
@@ -205,6 +254,12 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
     border-radius: 8px;
     border: 1px solid var(--border);
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+    cursor: zoom-in;
+  }
+
+  .markdown-content :global(a.glightbox) {
+    display: block;
+    text-decoration: none;
   }
 
   .markdown-content :global(ul), .markdown-content :global(ol) {
