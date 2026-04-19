@@ -44,15 +44,15 @@ import SkillTag from '../components/SkillTag.astro';
       {certifications.map(cert => (
         <div class="cert-row">
           <span class={`status-dot ${cert.status}`}></span>
-          <span class="cert-name">{cert.name}</span>
+          <span class="cert-name">{cert.title}</span>
           <span class="divider">·</span>
           <span class="cert-issuer">{cert.issuer}</span>
           <span class="divider">·</span>
-          <span class="cert-year">{cert.date}</span>
-          {cert.url && (
+          <span class="cert-year">{cert.year}</span>
+          {cert.verifyUrl && (
             <>
               <span class="divider">·</span>
-              <a href={cert.url} target="_blank" rel="noopener noreferrer" class="cert-link">verify ↗</a>
+              <a href={cert.verifyUrl} target="_blank" rel="noopener noreferrer" class="cert-link">verify ↗</a>
             </>
           )}
         </div>

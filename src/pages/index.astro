@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { profile } from '../data/profile';
 import { skillCategories } from '../data/skills';
+import { certifications } from '../data/certifications';
 import { getCollection } from 'astro:content';
 import WriteupCard from '../components/WriteupCard.astro';
 import SkillTag from '../components/SkillTag.astro';
@@ -68,6 +69,30 @@ const topSkills = skillCategories.flatMap(c => c.tools).slice(0, 10);
     <div class="tools-list">
       {topSkills.map((tool) => (
         <SkillTag name={tool} />
+      ))}
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <section class="certifications">
+    <h2 class="section-label">// certifications</h2>
+    <div class="cert-list">
+      {certifications.map(cert => (
+        <div class="cert-row">
+          <span class={`status-dot ${cert.status}`}></span>
+          <span class="cert-name">{cert.title}</span>
+          <span class="divider">·</span>
+          <span class="cert-issuer">{cert.issuer}</span>
+          <span class="divider">·</span>
+          <span class="cert-year">{cert.year}</span>
+          {cert.verifyUrl && (
+            <>
+              <span class="divider">·</span>
+              <a href={cert.verifyUrl} target="_blank" rel="noopener noreferrer" class="cert-link">verify ↗</a>
+            </>
+          )}
+        </div>
       ))}
     </div>
   </section>
@@ -196,6 +221,65 @@ const topSkills = skillCategories.flatMap(c => c.tools).slice(0, 10);
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+  }
+
+  .cert-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .cert-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    background: var(--bg-surface);
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .status-dot.completed {
+    background: var(--green);
+  }
+
+  .status-dot.in-progress {
+    border: 1px solid var(--amber);
+    background: transparent;
+  }
+
+  .status-dot.planned {
+    border: 1px dashed var(--text-tertiary);
+    background: transparent;
+  }
+
+  .cert-name {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  .cert-issuer {
+    color: var(--text-secondary);
+  }
+
+  .cert-year {
+    color: var(--text-tertiary);
+  }
+
+  .divider {
+    color: var(--text-tertiary);
+  }
+
+  .cert-link {
+    font-size: 0.75rem;
   }
 
   .status-list {

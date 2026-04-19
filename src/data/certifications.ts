@@ -1,26 +1,35 @@
-export const certifications = [
+export type CertificationStatus = "completed" | "in-progress" | "planned";
+
+export type Certification = {
+  title: string;
+  issuer: string;
+  year: string;
+  verifyUrl: string | null;
+  status: CertificationStatus;
+};
+
+export const certifications: Certification[] = [
   {
-    name: "Google Cybersecurity Certificate",
-    issuer: "Google / Coursera",
-    date: "2024",
-    // TODO: Add real certificate URLs in src/data/certifications.ts
-    url: "TODO_CERT_URL",
-    status: "completed",
-  },
-  {
-    name: "CompTIA Security+",
-    issuer: "CompTIA",
-    date: "2025",
-    url: null,
-    status: "in-progress",
-  },
-  {
-    name: "TryHackMe SOC Level 1",
+    title: "TryHackMe SOC Level 1",
     issuer: "TryHackMe",
-    date: "2024",
-    // TODO: Add real certificate URLs
-    url: "TODO_CERT_URL",
+    year: "2026",
+    verifyUrl: null,
     status: "completed",
   },
-  // TODO: replace with real data from repo
-]
+
+  // Uncomment when earned:
+  // {
+  //   title: "Google Cybersecurity Certificate",
+  //   issuer: "Google / Coursera",
+  //   year: "2024",
+  //   verifyUrl: null,
+  //   status: "planned",
+  // },
+  // {
+  //   title: "CompTIA Security+",
+  //   issuer: "CompTIA",
+  //   year: "2025",
+  //   verifyUrl: null,
+  //   status: "planned",
+  // },
+];
