@@ -14,7 +14,7 @@ because writing a writeup is how I prove I understood it.`,
     linkedin:      "https://www.linkedin.com/in/0x-mahmoud-hussien/",
     tryhackme:     "https://tryhackme.com/p/0xMahmoudHussien",
     cyberdefenders:"https://cyberdefenders.org/p/mahmoud_hussien",
-    email:         "Tmahmoud.abdelmaqsoud.hussien@gmail.com",
+    email:         "mahmoud.abdelmaqsoud.hussien@gmail.com",
   },
 
   stats: {
