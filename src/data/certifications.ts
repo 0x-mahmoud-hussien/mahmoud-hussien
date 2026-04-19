@@ -13,7 +13,7 @@ export const certifications: Certification[] = [
     title: "TryHackMe SOC Level 1",
     issuer: "TryHackMe",
     year: "2026",
-    verifyUrl: null,
+    verifyUrl: "https://tryhackme.com/certificate/THM-ABGE8YCQYT",
     status: "completed",
   },
 
