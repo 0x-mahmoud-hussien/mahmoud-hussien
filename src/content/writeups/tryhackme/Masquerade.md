@@ -3,7 +3,7 @@ title: "Operation Stealthy C2: Analyzing TrevorC2 & Covert Channels"
 description: "A deep-dive DFIR investigation into a targeted phishing attack on a Finance workstation, uncovering PowerShell droppers, TrevorC2 backdoors, and AES-256 encrypted C2 traffic."
 date: 2026-04-19
 platform: "TryHackMe"
-difficulty: "medium"
+difficulty: "Medium"
 category: "Digital Forensics / Malware Analysis"
 tags: ["TrevorC2", "PowerShell-Deobfuscation", "AES-256", "C2-Communication", "Network-Forensics", "ILSpy"]
 featured: true

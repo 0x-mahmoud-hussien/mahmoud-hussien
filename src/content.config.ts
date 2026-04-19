@@ -9,7 +9,7 @@ const writeups = defineCollection({
     date:         z.coerce.date(),
     platform:     z.enum(['TryHackMe', 'CyberDefenders', 'HackTheBox', 'Other']),
     difficulty:   z.enum(['Easy', 'Medium', 'Hard']),
-    category:     z.enum(['Blue Team', 'Forensics', 'CTF', 'Threat Hunting', 'OSINT', 'Web', 'Crypto', 'Incident Response / DFIR']),
+    category:     z.enum(['Blue Team', 'Forensics', 'CTF', 'Threat Hunting', 'OSINT', 'Web', 'Crypto', 'Incident Response / DFIR', 'Digital Forensics / Malware Analysis']),
     tags:         z.array(z.string()),
     featured:     z.boolean().default(false),  // show on home page
     draft:        z.boolean().default(false),  // hide from listing if true
