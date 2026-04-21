@@ -1,21 +1,28 @@
 ---
+interface Props {
+  platforms: string[];
+  categories: string[];
+}
+
+const { platforms, categories } = Astro.props;
 ---
 <div class="filter-bar">
-  <div class="filter-group" id="filter-platform">
-    <button class="filter-btn active" data-value="All">All</button>
-    <button class="filter-btn" data-value="TryHackMe">TryHackMe</button>
-    <button class="filter-btn" data-value="CyberDefenders">CyberDefenders</button>
-    <button class="filter-btn" data-value="HackTheBox">HackTheBox</button>
-    <button class="filter-btn" data-value="picoCTF">picoCTF</button>
-  </div>
-  <div class="filter-group" id="filter-category">
-    <button class="filter-btn active" data-value="All">All</button>
-    <button class="filter-btn" data-value="Blue Team">Blue Team</button>
-    <button class="filter-btn" data-value="Forensics">Forensics</button>
-    <button class="filter-btn" data-value="CTF">CTF</button>
-    <button class="filter-btn" data-value="Threat Hunting">Threat Hunting</button>
-    <button class="filter-btn" data-value="OSINT">OSINT</button>
-  </div>
+  {platforms.length > 1 && (
+    <div class="filter-group" id="filter-platform">
+      <button class="filter-btn active" data-value="All">All</button>
+      {platforms.map(platform => (
+        <button class="filter-btn" data-value={platform}>{platform}</button>
+      ))}
+    </div>
+  )}
+  {categories.length > 1 && (
+    <div class="filter-group" id="filter-category">
+      <button class="filter-btn active" data-value="All">All</button>
+      {categories.map(category => (
+        <button class="filter-btn" data-value={category}>{category}</button>
+      ))}
+    </div>
+  )}
 </div>
 
 <style>
@@ -74,23 +81,29 @@
     });
   }
 
-  document.querySelectorAll('#filter-platform .filter-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const target = e.target as HTMLButtonElement;
-      document.querySelectorAll('#filter-platform .filter-btn').forEach(b => b.classList.remove('active'));
-      target.classList.add('active');
-      platformFilter = target.dataset.value || 'All';
-      applyFilters();
+  const platformBtns = document.querySelectorAll('#filter-platform .filter-btn');
+  if (platformBtns.length > 0) {
+    platformBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const target = e.target as HTMLButtonElement;
+        document.querySelectorAll('#filter-platform .filter-btn').forEach(b => b.classList.remove('active'));
+        target.classList.add('active');
+        platformFilter = target.dataset.value || 'All';
+        applyFilters();
+      });
     });
-  });
+  }
 
-  document.querySelectorAll('#filter-category .filter-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const target = e.target as HTMLButtonElement;
-      document.querySelectorAll('#filter-category .filter-btn').forEach(b => b.classList.remove('active'));
-      target.classList.add('active');
-      categoryFilter = target.dataset.value || 'All';
-      applyFilters();
+  const categoryBtns = document.querySelectorAll('#filter-category .filter-btn');
+  if (categoryBtns.length > 0) {
+    categoryBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const target = e.target as HTMLButtonElement;
+        document.querySelectorAll('#filter-category .filter-btn').forEach(b => b.classList.remove('active'));
+        target.classList.add('active');
+        categoryFilter = target.dataset.value || 'All';
+        applyFilters();
+      });
     });
-  });
+  }
 </script>

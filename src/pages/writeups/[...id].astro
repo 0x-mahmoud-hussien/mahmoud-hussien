@@ -126,9 +126,23 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
 
 <style>
   .writeup-container {
-    max-width: var(--max-width);
+    max-width: 100%;
     margin: 0 auto;
     width: 100%;
+    padding: 0 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .writeup-container {
+      max-width: 800px;
+      padding: 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .writeup-container {
+      max-width: 56rem; /* 896px, similar to max-w-4xl in Tailwind */
+    }
   }
 
   .back-link {

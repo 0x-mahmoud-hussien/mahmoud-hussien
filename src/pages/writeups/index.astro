@@ -8,13 +8,16 @@ const allWriteups = await getCollection('writeups');
 const publishedWriteups = allWriteups
   .filter(w => !w.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const platforms = [...new Set(allWriteups.map(w => w.data.platform))];
+const categories = [...new Set(allWriteups.map(w => w.data.category))];
 ---
 <BaseLayout title="Writeups" description="All my cybersecurity writeups and lab completions.">
   <section class="writeups-header">
     <h1 class="section-label">// all writeups ({publishedWriteups.length})</h1>
   </section>
 
-  <FilterBar />
+  <FilterBar platforms={platforms} categories={categories} />
 
   <div class="writeups-grid">
     {publishedWriteups.map(writeup => (
