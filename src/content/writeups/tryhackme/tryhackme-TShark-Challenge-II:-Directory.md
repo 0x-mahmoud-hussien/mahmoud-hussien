@@ -51,8 +51,8 @@ The output produced a list of queried domains. Each unique domain was submitted 
 ```
 jx2-bavuong[.]com
 ```
-![Answer](../images/TShark-Challenge-II:Directory-1.png)
-![Answer](../images/TShark-Challenge-II:Directory-2.png)
+![Answer](./images/TShark-Challenge-II-Directory-1.png)
+![Answer](./images/TShark-Challenge-II-Directory-2.png)
 
 ---
 
@@ -79,7 +79,7 @@ tshark -r directory-curiosity.pcap \
 ```
 14
 ```
-![Answer](../images/TShark-Challenge-II:Directory-3.png)
+![Answer](./images/TShark-Challenge-II-Directory-3.png)
 
 ---
 
@@ -100,8 +100,8 @@ tshark -r directory-curiosity.pcap \
 ```
 141[.]164[.]41[.]174
 ```
-![Answer](../images/TShark-Challenge-II:Directory-4.png)
-![Answer](../images/TShark-Challenge-II:Directory-5.png) 
+![Answer](./images/TShark-Challenge-II-Directory-4.png)
+![Answer](./images/TShark-Challenge-II-Directory-5.png) 
 
 ---
 
@@ -128,7 +128,7 @@ The server banner revealed a severely outdated and vulnerable software stack —
 ```
 Apache/2.2.11 (Win32) DAV/2 mod_ssl/2.2.11 OpenSSL/0.9.8i PHP/5.2.9
 ```
-![Answer](../images/TShark-Challenge-II:Directory-6.png) 
+![Answer](./images/TShark-Challenge-II-Directory-6.png) 
 
 ---
 
@@ -154,7 +154,7 @@ Counting the listed entries in the directory index output:
 ```
 
 *(Files listed: `123.php`, `vlauto.php`, `vlauto.exe`)*
-![Answer](../images/TShark-Challenge-II:Directory-7.png) 
+![Answer](./images/TShark-Challenge-II-Directory-7.png) 
 
 ---
 
@@ -191,7 +191,7 @@ Among the exported files, one `.exe` file was present — the artifact downloade
 ```
 vlauto[.]exe
 ```
-![Answer](../images/TShark-Challenge-II:Directory-8.png) 
+![Answer](./images/TShark-Challenge-II-Directory-8.png) 
 
 ---
 
@@ -212,7 +212,7 @@ The hash was then submitted to **VirusTotal** for full threat intelligence analy
 ```
 b4851333efaf399889456f78eac0fd532e9d8791b23a86a19402c1164aed20de
 ```
-![Answer](../images/TShark-Challenge-II:Directory-9.png) 
+![Answer](./images/TShark-Challenge-II-Directory-9.png) 
 
 ---
 
@@ -229,7 +229,7 @@ The PEiD value indicates how the executable was compiled and whether any packing
 ```
 .NET executable
 ```
-![Answer](../images/TShark-Challenge-II:Directory-10.png) 
+![Answer](./images/TShark-Challenge-II-Directory-10.png) 
 
 ---
 
@@ -244,7 +244,7 @@ On the same VirusTotal page, navigating to the **Behavior** tab and reviewing th
 ```
 MALWARE TROJAN BOTNET
 ```
-![Answer](../images/TShark-Challenge-II:Directory-11.png) 
+![Answer](./images/TShark-Challenge-II-Directory-11.png) 
 
 ---
 

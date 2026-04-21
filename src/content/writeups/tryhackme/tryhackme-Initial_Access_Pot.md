@@ -63,7 +63,7 @@ Mozilla/5.0 (Hydra)
 ```
 /wp-login.php
 ```
-![Answer](../images/Initial-Access-Pot1.png)
+![Answer](./images/Initial-Access-Pot1.png)
 
 ---
 
@@ -94,7 +94,7 @@ The file was placed inside the **Blocksy theme** directory — a legitimate them
 ```
 /var/www/html/wordpress/wp-content/themes/blocksy/404.php
 ```
-![Answer](../images/Initial-Access-Pot2.png)
+![Answer](./images/Initial-Access-Pot2.png)
 
 ---
 
@@ -125,7 +125,7 @@ ssh -i /etc/ssh/id_ed25519.bak root@localhost
 ```
 /etc/ssh/id_ed25519.bak
 ```
-![Answer](../images/Initial-Access-Pot3.png)
+![Answer](./images/Initial-Access-Pot3.png)
 
 ---
 
@@ -150,7 +150,7 @@ Targeted ports: **22 (SSH)**, **80 (HTTP)**, **3389 (RDP)** — indicating the a
 ```
 172.16.8.216
 ```
-![Answer](../images/Initial-Access-Pot4.png)
+![Answer](./images/Initial-Access-Pot4.png)
 
 ---
 
@@ -182,7 +182,7 @@ md5sum /usr/sbin/kworker
 ```
 d6f2d80e78f264aff8c7aea21acb6ca6
 ```
-![Answer](../images/Initial-Access-Pot5.png)
+![Answer](./images/Initial-Access-Pot5.png)
 
 ---
 
@@ -228,7 +228,7 @@ Em1lyR0ss_DeCePti!
 ```
 THM{acc3ss_gr4nt3d!}
 ```
-![Answer](../images/Initial-Access-Pot6.png)
+![Answer](./images/Initial-Access-Pot6.png)
 
 ---
 

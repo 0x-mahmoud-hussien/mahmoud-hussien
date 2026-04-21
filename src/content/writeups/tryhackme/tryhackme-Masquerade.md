@@ -69,7 +69,7 @@ Reassembling the full URL reveals the dropper server.
 ```
 api-edgecloud.xyz
 ```
-![Answer](../images/Masquerade-1.png)
+![Answer](./images/Masquerade-1.png)
 
 ---
 
@@ -108,7 +108,7 @@ This is a common technique in multi-stage loaders — each stage carries the dec
 ```
 X9vT3pL2QwE8xR6ZkYhC4s
 ```
-![Answer](../images/Masquerade-2.png)
+![Answer](./images/Masquerade-2.png)
 
 ---
 
@@ -121,7 +121,7 @@ Examining the captured network traffic (PCAP file) and filtering for HTTP respon
 ### Answer
 
 *(Extracted from HTTP response headers in the PCAP — recorded during network capture)*
-![Answer](../images/Masquerade-3.png)
+![Answer](./images/Masquerade-3.png)
 
 ---
 
@@ -142,8 +142,8 @@ Submitting the hash to **VirusTotal** confirmed the malware family as **TrevorC2
 ```
 e3d39d42df63c6874780737244370ba517820f598fd2443e47ff6580f10c17cb
 ```
-![Answer](../images/Masquerade-4.png)
-![Answer](../images/Masquerade-8.png)
+![Answer](./images/Masquerade-4.png)
+![Answer](./images/Masquerade-8.png)
 
 ---
 
@@ -167,7 +167,7 @@ http://34.174.57.99/images?guid=[AES_Base64_Encrypted_Data]
 ```
 http://34.174.57.99/images?guid=
 ```
-![Answer](../images/Masquerade-5.png)
+![Answer](./images/Masquerade-5.png)
 
 ---
 
@@ -191,7 +191,7 @@ M4squ3r4d3Th3P4ck3tSt34lthM0d31337
 ```
 AES-256 / M4squ3r4d3Th3P4ck3tSt34lthM0d31337
 ```
-![Answer](../images/Masquerade-6.png)
+![Answer](./images/Masquerade-6.png)
 
 ---
 
@@ -216,7 +216,7 @@ Command:  echo THM{m45k3d_tr4ff1c_0v3r_c0v3rt_ch4nn3lz}
 ```
 THM{m45k3d_tr4ff1c_0v3r_c0v3rt_ch4nn3lz}
 ```
-![Answer](../images/Masquerade-7.png)
+![Answer](./images/Masquerade-7.png)
 
 ---
 
