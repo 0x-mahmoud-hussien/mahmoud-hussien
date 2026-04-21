@@ -3,8 +3,8 @@ title: "Operation Directory Curiosity: Investigating Malicious File Indexing"
 description: "A SOC investigation into a True Positive alert where user curiosity led to a Trojan download via an exposed HTTP directory. Analyzing pcap traffic, extracting .NET malware, and validating IOCs with VirusTotal."
 date: 2026-04-21
 platform: "TryHackMe"
-difficulty: "Easy-Medium"
-category: "Network Forensics / SOC Analysis"
+difficulty: "Easy"
+category: "Network Forensics / PCAP Analysis / SOC Analysis"
 tags: ["TShark", "PCAP-Analysis", "Malware-Extraction", "VirusTotal", "Directory-Listing", "BlueBot-Trojan"]
 featured: true
 draft: false
