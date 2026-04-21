@@ -16,12 +16,4 @@ because writing a writeup is how I prove I understood it.`,
     cyberdefenders:"https://cyberdefenders.org/p/mahmoud_hussien",
     email:         "mahmoud.abdelmaqsoud.hussien@gmail.com",
   },
-
-  stats: {
-    // TODO: replace with real data from repo
-    writeups:       5,     
-    thmRank:        "Top 1%",
-    roomsCompleted: 47,
-    ctfsSolved:     12,
-  }
 }
