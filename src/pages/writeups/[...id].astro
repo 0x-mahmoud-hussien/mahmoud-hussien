@@ -117,10 +117,26 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
     container.dataset.lightboxInitialized = 'true';
   };
 
+  // لف كل جدول بـ wrapper عشان الـ scroll يبقى داخلي والجدول بعرضه الطبيعي
+  const wrapTables = () => {
+    const tables = document.querySelectorAll('.markdown-content table');
+    tables.forEach((table) => {
+      if (table.parentElement?.classList.contains('table-wrapper')) return;
+      const wrapper = document.createElement('div');
+      wrapper.className = 'table-wrapper';
+      table.parentNode?.insertBefore(wrapper, table);
+      wrapper.appendChild(table);
+    });
+  };
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setupWriteupLightbox, { once: true });
+    document.addEventListener('DOMContentLoaded', () => {
+      setupWriteupLightbox();
+      wrapTables();
+    }, { once: true });
   } else {
     setupWriteupLightbox();
+    wrapTables();
   }
 </script>
 
@@ -128,7 +144,7 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
   /* ─── FIX 1: Container محتاج padding على كل الشاشات ─── */
   .writeup-container {
     width: 100%;
-    max-width: 850px;
+    max-width: 960px;      /* زودنا من 850px لـ 960px */
     margin: 0 auto;
     padding: 0 1rem;       /* padding دايماً موجود على كل الشاشات */
     box-sizing: border-box;
@@ -317,15 +333,20 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
     width: 100%;            /* الـ link يملا العرض عشان الصورة تملاه كمان */
   }
 
-  /* ─── FIX 7: tables على الموبايل ─── */
-  .markdown-content :global(table) {
-    width: auto;            /* ياخد العرض اللي محتاجه بس، مش يتمدد */
-    min-width: 0;
-    max-width: 100%;
-    display: block;
-    overflow-x: auto;       /* لو الجدول كبير يعمل scroll داخلي */
+  /* ─── FIX 7: tables - wrapper للـ scroll وجدول بعرضه الطبيعي ─── */
+  .markdown-content :global(.table-wrapper) {
+    overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     margin: 1.5rem 0;
+    max-width: 100%;
+  }
+
+  .markdown-content :global(table) {
+    width: auto;             /* ياخد عرضه الطبيعي بس */
+    min-width: 0;
+    max-width: 100%;
+    display: table;          /* display طبيعي للجدول */
+    border-collapse: collapse;
   }
 
   .markdown-content :global(ul),
