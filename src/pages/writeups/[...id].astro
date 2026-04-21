@@ -125,16 +125,25 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
 </script>
 
 <style>
+  /* ─── FIX 1: Container محتاج padding على كل الشاشات ─── */
   .writeup-container {
     width: 100%;
     max-width: 850px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 1rem;       /* padding دايماً موجود على كل الشاشات */
+    box-sizing: border-box;
+    overflow-x: hidden;    /* يمنع أي overflow أفقي */
   }
 
   @media (min-width: 768px) {
     .writeup-container {
-      padding: 0;
+      padding: 0 1.5rem;   /* padding أكبر شوية على الـ desktop بدل ما يتمسح */
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .writeup-container {
+      padding: 0 2rem;
     }
   }
 
@@ -156,15 +165,29 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
   .title {
     margin-bottom: 1rem;
     line-height: 1.2;
+    /* FIX 2: كلمات طويلة في العنوان متكسرش على الموبايل */
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
 
+  /* ─── FIX 3: meta-row يتعامل صح مع الموبايل ─── */
   .meta-row {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: 0.5rem 0.75rem;   /* gap أقل في الارتفاع عشان ما يبقاش في مسافات كبيرة */
     margin-bottom: 1.5rem;
     font-size: 0.85rem;
+  }
+
+  /* على الموبايل الـ dividers تتخبى لما الـ items تنزل لسطر تاني */
+  @media (max-width: 480px) {
+    .divider {
+      display: none;
+    }
+    .meta-row {
+      gap: 0.4rem 0.6rem;
+    }
   }
 
   .divider {
@@ -202,6 +225,7 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
   .tools-label {
     font-size: 0.85rem;
     color: var(--text-secondary);
+    white-space: nowrap;
   }
 
   .tools-list {
@@ -225,8 +249,13 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
     margin-bottom: 3rem;
   }
 
+  /* ─── FIX 4: markdown-content تمنع overflow ─── */
   .markdown-content {
     line-height: 1.8;
+    width: 100%;
+    overflow-x: hidden;     /* أي حاجة أعرض من الشاشة متسببش scroll أفقي */
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
 
   .markdown-content :global(h2) {
@@ -236,25 +265,42 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
     font-size: 1.4rem;
     text-transform: none;
     letter-spacing: normal;
+    word-break: break-word;
   }
 
   .markdown-content :global(h3) {
     margin-top: 2rem;
     margin-bottom: 1rem;
     color: var(--text-primary);
+    word-break: break-word;
   }
 
   .markdown-content :global(p) {
     margin-bottom: 1.5rem;
   }
 
+  /* ─── FIX 5: code blocks تاخد scroll أفقي بدل ما تكسر الـ layout ─── */
   .markdown-content :global(pre) {
     margin: 1.5rem 0;
+    overflow-x: auto;       /* scroll أفقي داخل الـ code block بس */
+    max-width: 100%;
+    /* على الموبايل padding أصغر */
+    padding: 1rem;
+    box-sizing: border-box;
   }
 
+  .markdown-content :global(code) {
+    word-break: break-all;  /* inline code ينكسر لو طويل */
+  }
+
+  .markdown-content :global(pre code) {
+    word-break: normal;     /* لكن داخل code block خليه يتسكرول */
+  }
+
+  /* ─── FIX 6: الصور تملا عرض الشاشة بشكل صح على الموبايل ─── */
   .markdown-content :global(img) {
     display: block;
-    width: auto;
+    width: 100%;            /* اتغير من auto لـ 100% عشان تملا العرض */
     max-width: 100%;
     height: auto;
     margin: 2rem auto;
@@ -262,14 +308,25 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
     border: 1px solid var(--border);
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
     cursor: zoom-in;
+    box-sizing: border-box;
   }
 
   .markdown-content :global(a.glightbox) {
     display: block;
     text-decoration: none;
+    width: 100%;            /* الـ link يملا العرض عشان الصورة تملاه كمان */
   }
 
-  .markdown-content :global(ul), .markdown-content :global(ol) {
+  /* ─── FIX 7: tables على الموبايل ─── */
+  .markdown-content :global(table) {
+    width: 100%;
+    display: block;
+    overflow-x: auto;       /* tables كبيرة تاخد scroll أفقي */
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .markdown-content :global(ul),
+  .markdown-content :global(ol) {
     margin-bottom: 1.5rem;
     padding-left: 1.5rem;
   }
@@ -285,6 +342,9 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
     margin: 1.5rem 0;
     color: var(--text-secondary);
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    /* على الموبايل متعدش الحدود */
+    box-sizing: border-box;
+    max-width: 100%;
   }
   
   .markdown-content :global(blockquote p:last-child) {
