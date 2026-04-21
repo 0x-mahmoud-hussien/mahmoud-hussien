@@ -1,9 +1,9 @@
 ---
-import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PlatformBadge from '../../components/PlatformBadge.astro';
 import DifficultyBadge from '../../components/DifficultyBadge.astro';
 import SkillTag from '../../components/SkillTag.astro';
+import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const writeups = await getCollection('writeups');
