@@ -319,10 +319,13 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
 
   /* ─── FIX 7: tables على الموبايل ─── */
   .markdown-content :global(table) {
-    width: 100%;
+    width: auto;            /* ياخد العرض اللي محتاجه بس، مش يتمدد */
+    min-width: 0;
+    max-width: 100%;
     display: block;
-    overflow-x: auto;       /* tables كبيرة تاخد scroll أفقي */
+    overflow-x: auto;       /* لو الجدول كبير يعمل scroll داخلي */
     -webkit-overflow-scrolling: touch;
+    margin: 1.5rem 0;
   }
 
   .markdown-content :global(ul),
