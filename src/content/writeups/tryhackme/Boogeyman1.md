@@ -1,5 +1,5 @@
 ---
-title: "TryHackMe: The Boogeyman Incident Investigation"
+title: "TryHackMe: The Boogeyman 1 Incident Investigation"
 description: "A comprehensive digital forensics and incident response analysis tracking the Boogeyman threat group. Covers email header forensics, malicious LNK parsing, local database harvesting, and network detection of stealthy DNS tunneling."
 date: 2026-05-16
 platform: "TryHackMe"

@@ -1,5 +1,5 @@
 ---
-title: "TryHackMe: Case Boogeyman DFIR Writeup"
+title: "TryHackMe: Case Boogeyman 3 DFIR Writeup"
 description: "A comprehensive digital forensics and incident response investigation on a compromised Windows domain infrastructure (Quick Logistics LLC) to analyze phishing initial access, UAC bypass, credential dumping via Mimikatz, lateral movement via WinRM, and Active Directory compromise via DCSync leading to LockBit ransomware staging."
 date: 2026-05-18
 platform: "TryHackMe"
