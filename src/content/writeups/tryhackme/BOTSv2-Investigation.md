@@ -12,8 +12,6 @@ tools: ["Splunk Enterprise", "CyberChef", "Any.Run", "VirusTotal"]
 room_url: "https://tryhackme.com/room/splunk2gcd5"
 ---
 
----
-
 # Splunk 2: Boss of the SOC v2 — CTF Writeup
 
 ---
