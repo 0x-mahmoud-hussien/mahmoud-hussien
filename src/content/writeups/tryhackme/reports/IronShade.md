@@ -57,7 +57,7 @@ hostnamectl | grep "Machine ID"
 ```
 dc7c8ac5c09a4bbfaf3d09d399f10d96
 ```
-![Answer](./images/IronShade1.png)
+![Answer](../images/IronShade1.png)
 
 ---
 
@@ -78,7 +78,7 @@ The account name deliberately mimics a legitimate-sounding service name (`micros
 ```
 mircoservice
 ```
-![Answer](./images/IronShade2.png)
+![Answer](../images/IronShade2.png)
 
 ---
 
@@ -101,7 +101,7 @@ The attacker registered a `@reboot` trigger to automatically execute the `printe
 ```
 @reboot /home/mircoservice/printer_app
 ```
-![Answer](./images/IronShade3.png)
+![Answer](../images/IronShade3.png)
 
 ---
 
@@ -128,7 +128,7 @@ Two processes were found running from the backdoor account's home directory. The
 ```
 /home/mircoservice/.tmp/.strokes
 ```
-![Answer](./images/IronShade4.png)
+![Answer](../images/IronShade4.png)
 
 ---
 
@@ -174,7 +174,7 @@ Size: 17K | Permissions: -rwxr-xr-x | Owner: root
 ```
 /.systmd
 ```
-![Answer](./images/IronShade5.png)
+![Answer](../images/IronShade5.png)
 
 ---
 
@@ -200,7 +200,7 @@ Two unauthorized services were found, both pointing to binaries within the backd
 ```
 backup.service, strokes.service
 ```
-![Answer](./images/IronShade6.png)
+![Answer](../images/IronShade6.png)
 
 ---
 
@@ -221,7 +221,7 @@ The log entry confirms the exact timestamp when the attacker created the backdoo
 ```
 Aug 5 22:05:33
 ```
-![Answer](./images/IronShade7.png)
+![Answer](../images/IronShade7.png)
 
 ---
 
@@ -243,7 +243,7 @@ All successful and attempted SSH sessions for the `mircoservice` account origina
 ```
 10.11.75.247
 ```
-![Answer](./images/IronShade8.png)
+![Answer](../images/IronShade8.png)
 
 ---
 
@@ -291,7 +291,7 @@ The package was installed approximately 5 minutes after the threat actor's first
 ```
 pscanner
 ```
-![Answer](./images/IronShade9.png)
+![Answer](../images/IronShade9.png)
 
 ---
 
@@ -323,7 +323,7 @@ The secret code embedded in the package metadata serves as an adversary watermar
 ```
 Secret_code{_tRy_Hack_ME_}
 ```
-![Answer](./images/IronShade10.png)
+![Answer](../images/IronShade10.png)
 
 ---
 

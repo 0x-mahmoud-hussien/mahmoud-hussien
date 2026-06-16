@@ -66,7 +66,7 @@ Starting with network traffic analysis, filtering for HTTPS traffic (port 443) a
 ```
 OUTSTANDING_GUTTER.exe
 ```
-![Answer](./images/BlackSun1.png)
+![Answer](../images/BlackSun1.png)
 
 ---
 
@@ -89,9 +89,9 @@ Reviewing deduplicated PowerShell command lines reveals an encoded download crad
 ```
 hxxp[://]886e-181-215-214-32[.]ngrok[.]io
 ```
-![Answer](./images/BlackSun2.png)
-![Answer](./images/BlackSun3.png)
-![Answer](./images/BlackSun4.png)
+![Answer](../images/BlackSun2.png)
+![Answer](../images/BlackSun3.png)
+![Answer](../images/BlackSun4.png)
 
 ---
 
@@ -106,7 +106,7 @@ From the same PowerShell log analysis, the parent process and command structure 
 ```
 C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
 ```
-![Answer](./images/BlackSun5.png)
+![Answer](../images/BlackSun5.png)
 
 ---
 
@@ -128,7 +128,7 @@ Filtering for `schtasks.exe` activity captures the exact command the attacker us
 ```
 SCHTASKS /Create /TN "OUTSTANDING_GUTTER.exe" /TR "C:\Windows\Temp\OUTSTANDING_GUTTER.exe" /SC ONEVENT /EC Application /MO *[System/EventID=777] /RU "SYSTEM" /f
 ```
-![Answer](./images/BlackSun6.png)
+![Answer](../images/BlackSun6.png)
 
 ---
 
@@ -143,7 +143,7 @@ From the scheduled task configuration, the `/RU "SYSTEM"` flag specifies the exe
 ```
 NT AUTHORITY\SYSTEM;"C:\Windows\system32\schtasks.exe" /Run /TN OUTSTANDING_GUTTER.exe
 ```
-![Answer](./images/BlackSun7.png)
+![Answer](../images/BlackSun7.png)
 
 ---
 
@@ -158,8 +158,8 @@ Separate from the delivery URL, the executed binary established its own outbound
 ```
 hxxp[://]9030-181-215-214-32[.]ngrok[.]io
 ```
-![Answer](./images/BlackSun8.png)
-![Answer](./images/BlackSun9.png)
+![Answer](../images/BlackSun8.png)
+![Answer](../images/BlackSun9.png)
 
 ---
 
@@ -174,7 +174,7 @@ Reviewing file creation events in the `C:\Windows\Temp\` directory (the same dro
 ```
 script.ps1
 ```
-![Answer](./images/BlackSun10.png)
+![Answer](../images/BlackSun10.png)
 
 ---
 
@@ -199,7 +199,7 @@ e5429f2e44990b3d4e249c566fbf19741e671c0e40b809f87248d9ec9114bef9
 ```
 BlackSun.ps1
 ```
-![Answer](./images/BlackSun11.png)
+![Answer](../images/BlackSun11.png)
 
 ---
 
@@ -221,7 +221,7 @@ Filtering Sysmon file creation events (Event ID 11) for `.txt` files and reviewi
 ```
 C:\Users\keegan\Downloads\vasg6b0wmw029hd\BlackSun_README.txt
 ```
-![Answer](./images/BlackSun12.png)
+![Answer](../images/BlackSun12.png)
 
 ---
 
@@ -243,7 +243,7 @@ Filtering for `.jpg` file creation events reveals the ransomware dropped a brand
 ```
 C:\Users\Public\Pictures\blacksun.jpg
 ```
-![Answer](./images/BlackSun13.png)
+![Answer](../images/BlackSun13.png)
 
 ---
 

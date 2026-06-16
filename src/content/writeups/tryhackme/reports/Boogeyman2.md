@@ -51,7 +51,7 @@ The sender used a spoofed identity of "Wesley Taylor" with a personal Outlook ad
 ```
 westaylor23@outlook.com
 ```
-![Answer](./images/Boogeyman2-1.png)
+![Answer](../images/Boogeyman2-1.png)
 
 ---
 
@@ -66,7 +66,7 @@ cat "Resume - Application for Junior IT Analyst Role.eml" | grep "To: "
 ```
 maxine.beck@quicklogisticsorg.onmicrosoft.com
 ```
-![Answer](./images/Boogeyman2-2.png)
+![Answer](../images/Boogeyman2-2.png)
 
 ---
 
@@ -83,7 +83,7 @@ cat "Resume - Application for Junior IT Analyst Role.eml" | grep -i "filename"
 ```
 Resume_WesleyTaylor.doc
 ```
-![Answer](./images/Boogeyman2-3.png)
+![Answer](../images/Boogeyman2-3.png)
 
 ---
 
@@ -98,7 +98,7 @@ md5sum Resume_WesleyTaylor.doc
 ```
 52c4384a0b9e248b95804352ebec6c5b
 ```
-![Answer](./images/Boogeyman2-4.png)
+![Answer](../images/Boogeyman2-4.png)
 
 ---
 
@@ -145,7 +145,7 @@ The file is cloaked as a `.png` image to evade network-level content inspection,
 ```
 https://files.boogeymanisback.lol/aa2a9c53cbb80416d3b47d85538d9971/update.png
 ```
-![Answer](./images/Boogeyman2-5.png)
+![Answer](../images/Boogeyman2-5.png)
 
 ---
 
@@ -158,7 +158,7 @@ From the macro analysis, the last line calls `wscript.exe` to execute the downlo
 ```
 wscript.exe
 ```
-![Answer](./images/Boogeyman2-6.png)
+![Answer](../images/Boogeyman2-6.png)
 
 ---
 
@@ -171,7 +171,7 @@ From the VBA macro, the file is saved at:
 ```
 C:\ProgramData\update.js
 ```
-![Answer](./images/Boogeyman2-7.png)
+![Answer](../images/Boogeyman2-7.png)
 
 ---
 
@@ -190,7 +190,7 @@ The process tree confirms `wscript.exe` was spawned by `WINWORD.EXE`:
 ```
 4260
 ```
-![Answer](./images/Boogeyman2-8.png)
+![Answer](../images/Boogeyman2-8.png)
 
 ---
 
@@ -203,7 +203,7 @@ From the same `windows.pstree` output, `wscript.exe` (PID: 4260) was spawned by 
 ```
 1124
 ```
-![Answer](./images/Boogeyman2-9.png)
+![Answer](../images/Boogeyman2-9.png)
 
 ---
 
@@ -220,7 +220,7 @@ String carving the memory dump reveals `update.js` contacted the C2 staging doma
 ```
 https://files.boogeymanisback.lol/aa2a9c53cbb80416d3b47d85538d9971/update.exe
 ```
-![Answer](./images/Boogeyman2-10.png)
+![Answer](../images/Boogeyman2-10.png)
 
 ---
 
@@ -237,7 +237,7 @@ Active network connections show a standalone process (`updater.exe`) with an out
 ```
 6216
 ```
-![Answer](./images/Boogeyman2-11.png)
+![Answer](../images/Boogeyman2-11.png)
 
 ---
 
@@ -254,7 +254,7 @@ The binary was placed inside `C:\Windows\Tasks\` — a writable system directory
 ```
 C:\Windows\Tasks\updater.exe
 ```
-![Answer](./images/Boogeyman2-12.png)
+![Answer](../images/Boogeyman2-12.png)
 
 ---
 
@@ -267,7 +267,7 @@ From the `windows.netscan` output for PID 6216:
 ```
 128.199.95.189:8080
 ```
-![Answer](./images/Boogeyman2-13.png)
+![Answer](../images/Boogeyman2-13.png)
 
 ---
 
@@ -284,7 +284,7 @@ The cached attachment path from Outlook's INetCache reveals where Windows stored
 ```
 C:\Users\maxine.beck\AppData\Local\Microsoft\Windows\INetCache\Content.Outlook\WQHGZCFI\Resume_WesleyTaylor (002).doc
 ```
-![Answer](./images/Boogeyman2-14.png)
+![Answer](../images/Boogeyman2-14.png)
 
 ---
 
@@ -301,7 +301,7 @@ The string extraction captured the exact persistence command executed immediatel
 ```
 schtasks /Create /F /SC DAILY /ST 09:00 /TN Updater /TR 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NonI -W hidden -c \"IEX ([Text.Encoding]::UNICODE.GetString([Convert]::FromBase64String((gp HKCU:\Software\Microsoft\Windows\CurrentVersion debug).debug)))\"'
 ```
-![Answer](./images/Boogeyman2-15.png)
+![Answer](../images/Boogeyman2-15.png)
 
 **Technical Breakdown:**
 

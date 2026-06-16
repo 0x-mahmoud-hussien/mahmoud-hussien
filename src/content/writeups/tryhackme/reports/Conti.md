@@ -47,7 +47,7 @@ Searching for executable file activity in Sysmon logs and deduplicating by direc
 ```
 C:\Users\Administrator\Documents\cmd.exe
 ```
-![Answer](./images/Conti1.png)
+![Answer](../images/Conti1.png)
 
 
 ---
@@ -85,7 +85,7 @@ Sysmon process creation events (Event ID 1) include a `Hashes` field containing 
 ```
 290C7DFB01E50CEA9E19DA81A781AF2C
 ```
-![Answer](./images/Conti2.png)
+![Answer](../images/Conti2.png)
 
 ---
 
@@ -107,7 +107,7 @@ Using Sysmon Event ID 11 (FileCreate) and filtering for activity originating fro
 ```
 readme.txt
 ```
-![Answer](./images/Conti3.png)
+![Answer](../images/Conti3.png)
 
 ---
 
@@ -135,7 +135,7 @@ net localgroup "Remote Desktop Users" securityninja /add
 ```
 net user /add securityninja hardToHack123$
 ```
-![Answer](./images/Conti4.png)
+![Answer](../images/Conti4.png)
 
 ---
 
@@ -167,7 +167,7 @@ powershell.exe → unsecapp.exe → lsass.exe
 ```
 C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe, C:\Windows\System32\wbem\unsecapp.exe
 ```
-![Answer](./images/Conti5.png)
+![Answer](../images/Conti5.png)
 
 ---
 
@@ -208,7 +208,7 @@ Full path:
 ```
 \HttpProxy\owa\auth\i3gfPctK1c2x.aspx
 ```
-![Answer](./images/Conti6.png)
+![Answer](../images/Conti6.png)
 
 ---
 
@@ -223,7 +223,7 @@ From the same Sysmon query filtering for `.aspx` activity, the `CommandLine` fie
 ```
 attrib.exe  -r \\\\win-aoqkg2as2q7.bellybear.local\C$\Program Files\Microsoft\Exchange Server\V15\FrontEnd\HttpProxy\owa\auth\i3gfPctK1c2x.aspx
 ```
-![Answer](./images/Conti7.png)
+![Answer](../images/Conti7.png)
 
 ---
 

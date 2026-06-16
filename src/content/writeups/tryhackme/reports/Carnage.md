@@ -70,7 +70,7 @@ The first packet timestamp from the frame details panel:
 ```
 2021-09-24 16:44:38
 ```
-![Answer](./images/Carnage-1.png)
+![Answer](../images/Carnage-1.png)
 
 ---
 
@@ -89,7 +89,7 @@ GET /incidunt-consequatur/documents.zip HTTP/1.1
 ```
 documents.zip
 ```
-![Answer](./images/Carnage-2.png)
+![Answer](../images/Carnage-2.png)
 
 ---
 
@@ -108,7 +108,7 @@ Host: attirenepal.com
 ```
 attirenepal.com
 ```
-![Answer](./images/Carnage-3.png)
+![Answer](../images/Carnage-3.png)
 
 ---
 
@@ -125,7 +125,7 @@ The embedded spreadsheet filename was extracted directly from the stream:
 ```
 chart-1530076591.xls
 ```
-![Answer](./images/Carnage-4.png)
+![Answer](../images/Carnage-4.png)
 
 ---
 
@@ -144,7 +144,7 @@ Server: LiteSpeed
 ```
 LiteSpeed
 ```
-![Answer](./images/Carnage-5.png)
+![Answer](../images/Carnage-5.png)
 
 ---
 
@@ -163,7 +163,7 @@ X-Powered-By: PHP/7.2.34
 ```
 PHP/7.2.34
 ```
-![Answer](./images/Carnage-6.png)
+![Answer](../images/Carnage-6.png)
 
 ---
 
@@ -192,9 +192,9 @@ Three distinct external domains were identified:
 ```
 finejewels.com.au, thietbiagt.com, new.americold.com
 ```
-![Answer](./images/Carnage-7.png)
-![Answer](./images/Carnage-8.png)
-![Answer](./images/Carnage-9.png)
+![Answer](../images/Carnage-7.png)
+![Answer](../images/Carnage-8.png)
+![Answer](../images/Carnage-9.png)
 
 ---
 
@@ -207,7 +207,7 @@ From the TLS handshake inspection for `finejewels.com.au`, the Certificate detai
 ```
 GoDaddy
 ```
-![Answer](./images/Carnage-10.png)
+![Answer](../images/Carnage-10.png)
 
 ---
 
@@ -227,8 +227,8 @@ Cross-referenced destination IPs from post-infection C2 traffic with **VirusTota
 ```
 185.106.96.158, 185.125.204.174
 ```
-![Answer](./images/Carnage-11.png)
-![Answer](./images/Carnage-12.png)
+![Answer](../images/Carnage-11.png)
+![Answer](../images/Carnage-12.png)
 
 ---
 
@@ -243,7 +243,7 @@ Filtered HTTP traffic to the first Cobalt Strike IP (`185.106.96.158`) and inspe
 ```
 ocsp.verisign.com
 ```
-![Answer](./images/Carnage-13.png)
+![Answer](../images/Carnage-13.png)
 
 > **Note:** Using `ocsp.verisign.com` as the Host header is a deliberate **domain fronting / host spoofing** technique — the malware impersonates a legitimate Verisign OCSP (Online Certificate Status Protocol) request to blend C2 traffic with normal TLS certificate validation activity.
 
@@ -260,7 +260,7 @@ VirusTotal Community tab for `185.106.96.158` confirmed active Cobalt Strike C2 
 ```
 survmeter.live
 ```
-![Answer](./images/Carnage-14.png)
+![Answer](../images/Carnage-14.png)
 
 ---
 
@@ -275,7 +275,7 @@ VirusTotal Community tab for `185.125.204.174` confirmed the associated domain:
 ```
 securitybusinpuff.com
 ```
-![Answer](./images/Carnage-15.png)
+![Answer](../images/Carnage-15.png)
 
 ---
 
@@ -296,7 +296,7 @@ The `Host:` header in the POST request at `16:46:15 UTC` identifies the tracking
 ```
 maldivehost.net
 ```
-![Answer](./images/Carnage-16.png)
+![Answer](../images/Carnage-16.png)
 
 ---
 
@@ -315,7 +315,7 @@ POST /zLiIsQRWZI9/OQsaDixzHTgtfjMcGypGenpldWF5eV9f3k= HTTP/1.1
 ```
 zLiIsQRWZI9
 ```
-![Answer](./images/Carnage-17.png)
+![Answer](../images/Carnage-17.png)
 
 ---
 
@@ -330,7 +330,7 @@ Filtered traffic to the primary C2 server (`208.91.128.6`) and identified the ve
 ```
 281
 ```
-![Answer](./images/Carnage-18.png)
+![Answer](../images/Carnage-18.png)
 
 ---
 
@@ -349,7 +349,7 @@ Server: Apache/2.4.49 (cPanel) OpenSSL/1.1.1l mod_bwlimited/1.4
 ```
 Apache/2.4.49 (cPanel) OpenSSL/1.1.1l mod_bwlimited/1.4
 ```
-![Answer](./images/Carnage-19.png)
+![Answer](../images/Carnage-19.png)
 
 ---
 
@@ -370,7 +370,7 @@ The malware queried the local DNS resolver (`10.9.23.5`) to resolve the external
 ```
 2021-09-24 17:00:04 UTC
 ```
-![Answer](./images/Carnage-20.png)
+![Answer](../images/Carnage-20.png)
 
 ---
 
@@ -381,7 +381,7 @@ The malware queried the local DNS resolver (`10.9.23.5`) to resolve the external
 ```
 api.ipify.org
 ```
-![Answer](./images/Carnage-21.png)
+![Answer](../images/Carnage-21.png)
 
 ---
 
@@ -402,7 +402,7 @@ The first `MAIL FROM:` envelope address captured in the SMTP session identifies 
 ```
 farshin@mailfa.com
 ```
-![Answer](./images/Carnage-22.png)
+![Answer](../images/Carnage-22.png)
 
 ---
 
