@@ -4,7 +4,7 @@ description: "A comprehensive digital forensic investigation into a compromised 
 date: 2026-07-13
 platform: "CyberDefenders"
 difficulty: "Medium"
-category: "Incident Response / DFIR"
+category: "Endpoint Forensics"
 tags: ["memory-forensics", "process-injection", "c2-hunting", "evasion", "windows-forensics", "volatility3"]
 featured: true
 draft: false
