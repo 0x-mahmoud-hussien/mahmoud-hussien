@@ -3,7 +3,7 @@ title: "CyberDefenders: Reveal Lab - Volatile Memory Analysis"
 description: "A comprehensive digital forensic investigation into a compromised Windows endpoint using Volatility 3, mapping out remote WebDAV execution, Living-off-the-Land (LotL) evasion techniques, and StrelaStealer credential access infrastructure."
 date: 2026-07-13
 platform: "CyberDefenders"
-difficulty: "Medium"
+difficulty: "Easy"
 category: "Endpoint Forensics"
 tags: ["memory-forensics", "living-off-the-land", "c2-hunting", "evasion", "windows-forensics", "volatility3", "strelastealer"]
 featured: true
