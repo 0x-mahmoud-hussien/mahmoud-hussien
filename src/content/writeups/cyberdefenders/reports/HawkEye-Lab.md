@@ -435,7 +435,7 @@ United States
 Following the first SMTP TCP stream, the server's `220` welcome banner identifies the email server software:
 
 ```
-220-p3plcpnl0413.prod.phx3.secureserver.net Exim 4.91 ...
+220-p3plcpnl0413.prod.phx3.secureserver.net ESMTP Exim 4.91 ...
 ```
 
 ### Answer
