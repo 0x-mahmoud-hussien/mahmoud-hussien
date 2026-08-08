@@ -2,7 +2,7 @@ export const profile = {
   name: "Mahmoud Hussien",
   handle: "mh_", // used as logo monogram
   title: "Junior SOC Analyst",
-  status: "Actively practicing and solving rooms on TryHackMe to sharpen my SOC skills", // shown as a live badge on home hero
+  status: "Actively practicing and solving rooms on TryHackMe and CyberDefenders to sharpen my SOC skills",
   bio: `I'm a Junior SOC Analyst passionate about blue teaming, digital forensics, and threat hunting.
 I solve challenges on TryHackMe, CyberDefenders, and HackTheBox — and I document every one of them here,
 because writing a writeup is how I prove I understood it.`,
