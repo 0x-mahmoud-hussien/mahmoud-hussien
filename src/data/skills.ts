@@ -5,11 +5,11 @@ export const skillCategories = [
   },
   {
     label: "// Forensics & Analysis",
-    tools: ["Wireshark", "Volatility3", "Autopsy", "NetworkMiner", "FTK Imager", "Zeek"],
+    tools: ["Wireshark", "Volatility3", "Autopsy", "TShark", "FTK Imager", "Zeek"],
   },
   {
     label: "// Languages & Scripting",
-    tools: ["Python", "Bash", "PowerShell"],
+    tools: ["Python", "Bash"],
   },
   {
     label: "// Platforms & Environments",
