@@ -9,7 +9,7 @@ const writeups = defineCollection({
     date:         z.coerce.date(),
     platform:     z.enum(['TryHackMe', 'CyberDefenders', 'HackTheBox', 'Other']),
     difficulty:   z.enum(['Easy', 'Medium', 'Hard']),
-    category:     z.enum(['Blue Team', 'Forensics', 'CTF', 'Threat Hunting', 'OSINT', 'Web', 'Crypto', 'Incident Response / DFIR', 'Digital Forensics / Malware Analysis', 'Network Forensics / PCAP Analysis / SOC Analysis', "Incident Response / SOC Analysis", 'Digital Forensics / Incident Response', "Threat Hunting / Incident Response", "Network Forensics / Incident Response", "Incident Response / Digital Forensics (DFIR)", 'Endpoint Forensics', "Incident Response / Network Forensics", "Endpoint Forensics", "Network Forensics"]),
+    category:     z.enum(['Blue Team', 'Forensics', 'CTF', 'Threat Hunting', 'OSINT', 'Web', 'Crypto', 'Incident Response / DFIR', 'Digital Forensics / Malware Analysis', 'Network Forensics / PCAP Analysis / SOC Analysis', "Incident Response / SOC Analysis", 'Digital Forensics / Incident Response', "Threat Hunting / Incident Response", "Network Forensics / Incident Response", "Incident Response / Digital Forensics (DFIR)", 'Endpoint Forensics', "Incident Response / Network Forensics", "Endpoint Forensics", "Network Forensics", "Malware Analysis / Network Forensics"]),
     tags:         z.array(z.string()),
     featured:     z.boolean().default(false),  // show on home page
     draft:        z.boolean().default(false),  // hide from listing if true
