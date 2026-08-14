@@ -10,7 +10,7 @@ because writing a writeup is how I prove I understood it.`,
   openToWork: true,
 
   stats: {
-    writeups: 32,
+    writeups: 33,
   },
 
   social: {
