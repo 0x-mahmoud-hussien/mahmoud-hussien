@@ -2,7 +2,7 @@
 title: "CyberDefenders: The Silent Transfer Lab - Network Forensics Investigation"
 description: "A comprehensive network forensics investigation tracing initial compromise via typosquatted delivery, Cobalt Strike C2 HTTP beaconing, application-layer Base64 command decoding, internal SMB reconnaissance, RDP lateral movement, and sensitive financial backup exfiltration."
 date: 2026-08-09
-platform: "CyberDefenders"
+platform: "TryHackMe"
 difficulty: "Medium"
 category: "Network Forensics"
 tags: ["packet-analysis", "wireshark", "zeek", "snort", "c2-analysis", "cobalt-strike", "base64-decoding", "smb-discovery", "rdp-lateral-movement", "data-exfiltration", "incident-response"]

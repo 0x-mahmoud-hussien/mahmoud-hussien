@@ -2,7 +2,7 @@
 title: "Endpoint Threat Hunting: Finance Workstation Intrusion - Incident Response"
 description: "A comprehensive endpoint threat hunting investigation using Splunk and Sysmon telemetry to trace browser credential dumping via NirSoft, masqueraded binary execution, C2 callbacks, Windows Defender registry and WMI tampering via LOLBins, anti-forensics process termination, and NW.js framework persistence."
 date: 2026-08-10
-platform: "CyberDefenders"
+platform: "TryHackMe"
 difficulty: "Medium"
 category: "Endpoint Forensics"
 tags: ["splunk", "sysmon", "threat-hunting", "endpoint-forensics", "defense-evasion", "anti-forensics", "credential-dumping", "wmi-tampering", "lolbins", "c2-analysis", "incident-response"]
