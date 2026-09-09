@@ -12,8 +12,6 @@ tools: ["Splunk", "Zeek"]
 room_url: "https://tryhackme.com/room/trustedbydefault"
 ---
 
----
-
 ## Scenario Overview
 
 Aurora Retail Group escalated unusual authentication activity tied to a trusted service account (`svc-webapp`) normally associated with predictable customer-portal operations. Suspicious portal requests, endpoint telemetry, and outbound network traffic indicated a wider compromise. TSS was engaged to reconstruct the full incident from Splunk evidence — from initial portal exploitation through lateral movement to data staging.
