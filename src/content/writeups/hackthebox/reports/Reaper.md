@@ -2,7 +2,7 @@
 title: "Hack The Box: Reaper - Digital Forensics & Incident Response"
 description: "A comprehensive digital forensics investigation reconstructing an NTLM relay attack, workstation identity spoofing, and credential harvesting using Wireshark network capture and Windows Event Logs."
 date: 2026-09-13
-platform: "Hack The Box"
+platform: "HackTheBox"
 difficulty: "Easy"
 category: "SIEM & Incident Response"
 tags: ["hackthebox", "incident-response", "wireshark", "pcap-analysis", "windows-forensics", "ntlm-relay", "smb-security"]
