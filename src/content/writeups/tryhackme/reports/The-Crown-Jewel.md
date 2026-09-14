@@ -4,7 +4,7 @@ description: "A digital forensics and incident response write-up reconstructing 
 date: 2026-09-14
 platform: "TryHackMe"
 difficulty: "Easy"
-category: "Network Forensics & Incident Response"
+category: "Network Forensics / Incident Response"
 tags: ["wireshark", "splunk", "incident-response", "network-forensics", "arp-spoofing", "c2-analysis", "dns-tunneling", "credential-harvesting"]
 featured: true
 draft: false
