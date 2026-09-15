@@ -4,7 +4,7 @@ description: "A digital forensics and incident response write-up reconstructing 
 date: 2026-09-15
 platform: "TryHackMe"
 difficulty: "Hard"
-category: "Incident Response / Digital Forensics"
+category: 'Digital Forensics / Incident Response'
 tags: ["incident-response", "digital-forensics", "powershell", "psexec", "mimikatz", "c2-analysis", "persistence", "lateral-movement"]
 featured: true
 draft: false
