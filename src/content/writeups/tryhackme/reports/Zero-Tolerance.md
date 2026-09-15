@@ -8,7 +8,7 @@ category: "Incident Response / Digital Forensics"
 tags: ["incident-response", "digital-forensics", "powershell", "psexec", "mimikatz", "c2-analysis", "persistence", "lateral-movement"]
 featured: true
 draft: false
-tools: ["PowerShell", "Sysmon", "Splunk"]
+tools: ["Splunk", "Sysmon", "SQLite Viewer"]
 room_url: "https://tryhackme.com/room/zerotolerance"
 ---
 
