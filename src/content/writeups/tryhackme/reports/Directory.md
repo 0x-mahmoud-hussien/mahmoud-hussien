@@ -196,7 +196,7 @@ Analysis of the decrypted command blocks exposed post-exploitation activities fo
 **Command Extraction Loop:**
 
 ```bash
-while read -r line; do echo "$line" | grep -a '<S N="V">' | cut -d'>' -f2 | cut ...
+while read -r line; do echo "$line" | grep -a '<S N="V">' | cut -d'>' -f2 | cut -d'<' -f1; done < cmds.txt
 ```
 
 **Second Executed Command:**
