@@ -25,7 +25,7 @@ const siteHostname = Astro.site ? Astro.site.toString() : Astro.url.origin;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class:list={{ 'is-writeup': type === 'article' }}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -104,11 +104,28 @@ const siteHostname = Astro.site ? Astro.site.toString() : Astro.url.origin;
       @keyframes fadeIn {
         to { opacity: 1; }
       }
+
+      .layout-main {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 1.5rem;
+        padding-top: calc(var(--nav-height) + 3rem);
+        min-height: calc(100vh - var(--nav-height));
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      /* Report pages only — leave About / Contact / listing at --max-width */
+      .layout-main--article {
+        max-width: 1100px;
+      }
     </style>
   </head>
-  <body>
+  <body class:list={{ 'is-writeup': type === 'article' }}>
     <Nav />
-    <main style="max-width: var(--max-width); margin: 0 auto; padding: 1.5rem; padding-top: calc(var(--nav-height) + 3rem); min-height: calc(100vh - var(--nav-height)); display: flex; flex-direction: column;">
+    <main class:list={['layout-main', { 'layout-main--article': type === 'article' }]}>
       <slot />
     </main>
     <Footer />

@@ -1,34 +1,45 @@
 :root {
-  --bg-base:     #07090d;   /* near-black, slight blue tint */
-  --bg-surface:  #0d1117;   /* card/section backgrounds */
-  --bg-hover:    #161b22;   /* hover states */
+  --bg-base: #07090d;
+  --bg-surface: #0d1117;
+  --bg-hover: #161b22;
 
-  --accent:      #39d353;   /* terminal green — primary CTA, links, badges */
-  --accent-dim:  #26a641;   /* darker green for hover */
-  --accent-cyan: #58d6c8;   /* cyan — secondary accent, category tags */
-  --accent-muted: rgba(57, 211, 83, 0.12); /* green tint for card hover bg */
+  --accent: #39d353;
+  --accent-dim: #26a641;
+  --accent-cyan: #58d6c8;
+  --accent-muted: rgba(57, 211, 83, 0.12);
 
-  --text-primary:   #e6edf3;  /* main body text */
-  --text-secondary: #7d8590;  /* muted labels, dates, meta */
-  --text-tertiary:  #484f58;  /* borders, dividers */
+  --text-primary: #e6edf3;
+  --text-secondary: #7d8590;
+  --text-tertiary: #484f58;
 
-  --border:       rgba(57, 211, 83, 0.12);  /* default border color */
-  --border-hover: rgba(57, 211, 83, 0.35);  /* hover border color */
+  --border: rgba(57, 211, 83, 0.12);
+  --border-hover: rgba(57, 211, 83, 0.35);
 
-  --red:    #f85149;  /* difficulty: hard */
-  --amber:  #d29922;  /* difficulty: medium */
-  --green:  #39d353;  /* difficulty: easy */
+  --red: #f85149;
+  --amber: #d29922;
+  --green: #39d353;
 
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
   --radius-sm: 2px;
   --radius-md: 4px;
 
-  --max-width: 780px;   /* single-column content max-width — like erland */
+  /* General website width - unchanged */
+  --max-width: 780px;
+
+  /* Dedicated report width */
+  --writeup-max-width: 1100px;
+
   --nav-height: 56px;
 }
 
-*, *::before, *::after {
+/* ==============================
+   GLOBAL RESET
+================================ */
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
 }
@@ -48,11 +59,24 @@ body {
   min-height: 100vh;
 }
 
+html.is-writeup,
+body.is-writeup {
+  overflow-x: auto;
+}
+
+/* ==============================
+   SCANLINE EFFECT
+================================ */
+
 body::before {
   content: '';
   position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
+
   background: repeating-linear-gradient(
     to bottom,
     transparent 0px,
@@ -60,9 +84,14 @@ body::before {
     rgba(255, 255, 255, 0.05) 2px,
     rgba(255, 255, 255, 0.05) 4px
   );
+
   opacity: 0.025;
   z-index: 9999;
 }
+
+/* ==============================
+   LINKS
+================================ */
 
 a {
   color: var(--accent);
@@ -73,6 +102,10 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+/* ==============================
+   HEADINGS
+================================ */
 
 h1 {
   font-size: 2.2rem;
@@ -89,7 +122,12 @@ h2 {
   text-transform: uppercase;
 }
 
-code, pre {
+/* ==============================
+   CODE
+================================ */
+
+code,
+pre {
   font-family: var(--font-mono);
   border-radius: var(--radius-sm);
 }
@@ -111,13 +149,18 @@ pre code {
   color: inherit;
 }
 
+/* ==============================
+   GLOBAL TABLE DEFAULTS
+================================ */
+
 table {
   width: 100%;
   border-collapse: collapse;
   border: 1px solid var(--border);
 }
 
-th, td {
+th,
+td {
   border: 1px solid var(--border);
   padding: 0.65rem 0.85rem;
 }
@@ -125,6 +168,174 @@ th, td {
 th {
   background: rgba(255, 255, 255, 0.04);
 }
+
+/* ==================================================
+   REPORT PAGES (TryHackMe, Hack The Box, CyberDefenders)
+   html.is-writeup is set in BaseLayout — works in every browser,
+   including real Chrome, without depending on :has() or JS wrappers.
+================================================== */
+
+html.is-writeup .layout-main,
+body.is-writeup .layout-main,
+html.is-writeup .layout-main.layout-main--article,
+body.is-writeup .layout-main.layout-main--article {
+  width: min(calc(100% - 2rem), var(--writeup-max-width));
+  max-width: var(--writeup-max-width);
+  margin-inline: auto;
+}
+
+.writeup-container {
+  width: 100%;
+  max-width: var(--writeup-max-width);
+  min-width: 0;
+  margin-inline: auto;
+  padding-inline: 0;
+}
+
+.writeup-container .markdown-content {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.writeup-container .markdown-content h1,
+.writeup-container .markdown-content h2,
+.writeup-container .markdown-content h3,
+.writeup-container .markdown-content h4 {
+  max-width: 100%;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.writeup-container .markdown-content h2 {
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  font-size: 1.4rem;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.writeup-container .markdown-content h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.writeup-container .markdown-content p {
+  margin-bottom: 1.5rem;
+}
+
+.writeup-container .markdown-content ul,
+.writeup-container .markdown-content ol {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.writeup-container .markdown-content li {
+  margin-bottom: 0.5rem;
+}
+
+.writeup-container .markdown-content blockquote {
+  border-left: 3px solid var(--accent);
+  background: var(--bg-surface);
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  color: var(--text-secondary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+/* ==================================================
+   MARKDOWN TABLES — apply to the table itself, not only .table-wrapper
+================================================== */
+
+.writeup-container .markdown-content .table-wrapper {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin: 1.5rem 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.writeup-container .markdown-content table {
+  width: 100%;
+  min-width: 52rem;
+  max-width: none;
+  table-layout: auto;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+.writeup-container .markdown-content .table-wrapper table {
+  margin: 0;
+}
+
+.writeup-container .markdown-content th,
+.writeup-container .markdown-content td {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.8;
+  hyphens: none;
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.writeup-container .markdown-content th {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.writeup-container .markdown-content th:first-child,
+.writeup-container .markdown-content td:first-child {
+  white-space: nowrap;
+  min-width: 8rem;
+}
+
+.writeup-container .markdown-content th:nth-child(2),
+.writeup-container .markdown-content td:nth-child(2) {
+  min-width: 18rem;
+}
+
+.writeup-container .markdown-content th:nth-child(3),
+.writeup-container .markdown-content td:nth-child(3) {
+  min-width: 16rem;
+}
+
+.writeup-container .markdown-content td a,
+.writeup-container .markdown-content td code {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+/* Images inside reports */
+
+.writeup-container .markdown-content img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem auto;
+}
+
+/* Prevent wide code blocks from breaking the page */
+
+.writeup-container .markdown-content pre {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* ==================================================
+   ACCESSIBILITY
+================================================== */
 
 .sr-only {
   position: absolute;
@@ -137,6 +348,10 @@ th {
   white-space: nowrap;
   border-width: 0;
 }
+
+/* ==============================
+   SCROLLBAR
+================================ */
 
 ::-webkit-scrollbar {
   width: 8px;
@@ -156,8 +371,59 @@ th {
   background: var(--accent-dim);
 }
 
+/* ==============================
+   TABLET
+================================ */
+
+@media (max-width: 900px) {
+  html.is-writeup .layout-main,
+  body.is-writeup .layout-main {
+    width: calc(100% - 32px);
+    max-width: 100%;
+  }
+
+  .writeup-container {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* ==============================
+   MOBILE
+================================ */
+
+@media (max-width: 600px) {
+  body {
+    font-size: 0.85rem;
+  }
+
+  h1 {
+    font-size: 1.7rem;
+  }
+
+  .writeup-container {
+    padding-inline: 0;
+  }
+
+  .writeup-container .markdown-content table {
+    min-width: 52rem;
+  }
+
+  .writeup-container .markdown-content th,
+  .writeup-container .markdown-content td {
+    padding: 0.6rem 0.75rem;
+  }
+}
+
+/* ==============================
+   PRINT
+================================ */
+
 @media print {
-  body::before, nav, footer, .no-print {
+  body::before,
+  nav,
+  footer,
+  .no-print {
     display: none !important;
   }
 }
