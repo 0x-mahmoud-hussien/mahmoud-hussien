@@ -98,14 +98,15 @@ index="finance_mail" sourcetype="finance:mail:rfc822" sender_address=*lawson-row
 ```
 Disclosure_Schedule_Update.zip\ledgerdrop.exe      2026-10-09 02:33:25.526
 ```
-![Answer](../imgs/TheFinanceTrail-1.png)
+![Answer](../images/TheFinanceTrail-1.png)
 
 **Step 2** shows where the ZIP came from. The proxy log has the download of `/downloads/Disclosure_Schedule_Update.zip` by `10.81.70.254` at `02:33:16`, hosted on:
 
 ```
 lawson-rowe-review.com
 ```
-![Answer](../imgs/TheFinanceTrail-2.png)
+![Answer](../![Answer](../images/TheFinanceTrail-1.png)
+/TheFinanceTrail-2.png)
 
 **Step 3** looks in the mail index for mail sent from that same domain. The matching message:
 
@@ -126,7 +127,7 @@ The delivery time matches the timestamp embedded at the start of the Message-ID 
 ```
 20261009022902.06.1a247614eaf9@lawson-rowe-review.com
 ```
-![Answer](../imgs/TheFinanceTrail-3.png)
+![Answer](../images/TheFinanceTrail-3.png)
 
 ---
 
@@ -160,7 +161,7 @@ This is the user-interaction step: about four minutes after the email arrived (0
 ```
 VantaraFinancePortal.exe
 ```
-![Answer](../imgs/TheFinanceTrail-4.png)
+![Answer](../images/TheFinanceTrail-4.png)
 
 ---
 
@@ -193,7 +194,7 @@ The save happened 4 seconds after the proxy logged the download request (02:33:1
 ```
 98D66005B3F2CFD556EEF503EC1ADA73DE34C24D3800D41D8E30C43AF32DEDEF
 ```
-![Answer](../imgs/TheFinanceTrail-5.png)
+![Answer](../images/TheFinanceTrail-5.png)
 
 ---
 
@@ -227,7 +228,7 @@ The loader executed from the Temp folder where Windows extracted the ZIP (`Temp1
 ```
 AAD4B231C4AFC7D02A09344545A957086FE36CD6A9CCA8F1F92E1AC3DDFFAC5C
 ```
-![Answer](../imgs/TheFinanceTrail-6.png)
+![Answer](../images/TheFinanceTrail-6.png)
 
 ---
 
@@ -265,7 +266,7 @@ It re-runs the sync client every day at 03:15, so the foothold survives a reboot
 ```
 VantaraUpdateCheck
 ```
-![Answer](../imgs/TheFinanceTrail-7.png)
+![Answer](../images/TheFinanceTrail-7.png)
 
 ---
 
@@ -295,7 +296,7 @@ index="finance_web" http_host=*cdn-lawsonreview.net*
 | `VantaraSync.exe` process created (Sysmon `UtcTime`) | `2026-10-09 02:33:25.981` |
 | First beacon in the Nginx log | `2026-10-09 02:34:13` |
 
-![Answer](../imgs/TheFinanceTrail-8.png)
+![Answer](../images/TheFinanceTrail-8.png)
 
 The first beacon:
 
@@ -306,7 +307,7 @@ The first beacon:
 | Status | `204` |
 | User-Agent | `VantaraSync/4.1` |
 
-![Answer](../imgs/TheFinanceTrail-9.png)
+![Answer](../images/TheFinanceTrail-9.png)
 
 ```
 02:34:13 - 02:33:25.981 = 47.019 s  →  47 seconds
@@ -366,9 +367,9 @@ C2 destination: `203.0.113.45` over plain HTTP (port 80).
 ```
 50611
 ```
-![Answer](../imgs/TheFinanceTrail-10.png)
+![Answer](../images/TheFinanceTrail-10.png)
 
-![Answer](../imgs/TheFinanceTrail-11.png)
+![Answer](../images/TheFinanceTrail-11.png)
 
 ---
 
@@ -411,9 +412,9 @@ The primary C2 returned `503 Service Unavailable`, and the client moved to a bac
 ```
 8.307
 ```
-![Answer](../imgs/TheFinanceTrail-12.png)
+![Answer](../images/TheFinanceTrail-12.png)
 
-![Answer](../imgs/TheFinanceTrail-13.png)
+![Answer](../images/TheFinanceTrail-13.png)
 
 ---
 
@@ -447,7 +448,7 @@ index="finance_endpoint" EventCode=1 ProcessId=692
 | Command line | `"powershell.exe" -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command "Compress-Archive -Path 'C:\Users\maya.chen\Documents\BoardReview\*' -DestinationPath 'C:\Users\maya.chen\Documents\review_notes_2026.zip' -Force"` |
 
 The sync client launched PowerShell to archive the `BoardReview` folder. The command line uses `-NoProfile -NonInteractive -ExecutionPolicy Bypass`, so it runs silently and skips the execution policy.
-![Answer](../imgs/TheFinanceTrail-14.png)
+![Answer](../images/TheFinanceTrail-14.png)
 
 **Step 2:** the same PID, `692`, was used earlier by another process:
 
@@ -465,7 +466,7 @@ Windows recycles PIDs, so the number `692` first belonged to Chrome's legitimate
 ```
 elevation_service.exe
 ```
-![Answer](../imgs/TheFinanceTrail-15.png)
+![Answer](../images/TheFinanceTrail-15.png)
 
 ---
 
@@ -497,9 +498,9 @@ index="finance_network" event_type=smb "smb.command"=SMB2_COMMAND_WRITE
 ```
 40.986626 - 29.688 = 11.298626 s  →  11 whole seconds
 ```
-![Answer](../imgs/TheFinanceTrail-16.png)
+![Answer](../images/TheFinanceTrail-16.png)
 
-![Answer](../imgs/TheFinanceTrail-17.png)
+![Answer](../images/TheFinanceTrail-17.png)
 
 
 The archive was created, then written to the file server about 11 seconds later, and the write succeeded. That confirms the staged board-review material did move off the workstation to the file server.
